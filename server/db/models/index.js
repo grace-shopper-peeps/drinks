@@ -18,9 +18,6 @@ Orders.hasOne(Guest)
 Orders.hasOne(Cart)
 Cart.belongsTo(Orders)
 
-Orders.hasMany(Product)
-Product.belongsTo(Orders)
-
 User.hasOne(Cart)
 Cart.belongsTo(User)
 
