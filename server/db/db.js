@@ -10,8 +10,6 @@ const db = new Sequelize(
   }
 )
 
-db.sync({force: true})
-
 module.exports = db
 
 // This is a global Mocha hook used for resource cleanup.
