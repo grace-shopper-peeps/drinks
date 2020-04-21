@@ -1,4 +1,9 @@
 const User = require('./user')
+const Product = require('./product')
+const Orders = require('./orders')
+const Review = require('./reviews')
+const Guest = require('./guest')
+const Category = require('./category')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
