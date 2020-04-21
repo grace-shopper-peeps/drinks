@@ -24,3 +24,4 @@ router.get('/:userId', async (req, res, next) => {
     next(err)
   }
 })
+//routes
