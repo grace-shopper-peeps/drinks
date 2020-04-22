@@ -42,6 +42,10 @@ async function seed() {
     //order can have qty total but it also needs to get the productId and orderId from the thorugh table to display in  the order
   ])
 
+  const productOrder = await Promise.all([
+    ProductOrders.create({quantity: 3, orderId: 1, productId: 1})
+  ])
+
   // const productOrder = await Promise.all([
   //   ProductOrders.create({quantity: 3}), //how do we get the current price of the product with the productId into this model instance?
   // ])
@@ -50,7 +54,7 @@ async function seed() {
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${orders.length} orders`)
   console.log(`seeded ${categories.length} categories`)
-  // console.log(`seeded ${productOrder.length} product-order`)
+  console.log(`seeded ${productOrder.length} product-order`)
   console.log(`seeded successfully`)
 }
 
