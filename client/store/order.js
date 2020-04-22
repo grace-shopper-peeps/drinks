@@ -10,7 +10,7 @@ export const getOrder = order => ({
 export const fetchOrder = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`api/cart/`)
+      const {data} = await axios.get(`/api/cart`)
       dispatch(getOrder(data))
     } catch (err) {
       console.log('Error fetching order')

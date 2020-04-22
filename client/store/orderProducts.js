@@ -10,7 +10,7 @@ export const getOrderProducts = products => ({
 export const fetchOrderProducts = orderId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`api/cart/${orderId}`)
+      const {data} = await axios.get(`api/cart/`)
       dispatch(getOrderProducts(data)) //expect data to be an array with all the products with that orderId
     } catch (err) {
       console.log('Error fetching order-products')
