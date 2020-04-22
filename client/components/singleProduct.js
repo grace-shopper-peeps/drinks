@@ -8,13 +8,13 @@ export class Product extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    let product = this.props.product
     return (
       <div>
-        <h3>PRODUCT NAME HERE</h3>
-        <img src="IMAGE HERE" />
-        <div>PRODUCT PRICE HERE</div>
-        <p>PRODUCT DESCRIPTION HERE</p>
+        <h3>{product.title}</h3>
+        <img src={product.image} />
+        <div>{`Price: ${product.price}`}</div>
+        <p>{`Description: ${product.description}`}</p>
       </div>
     )
   }
