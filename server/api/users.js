@@ -24,4 +24,14 @@ router.get('/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    const users = await User.create(req.body)
+    res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //routes
