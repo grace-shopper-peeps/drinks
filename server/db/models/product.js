@@ -11,7 +11,7 @@ const Product = db.define('product', {
     allowNull: false
   },
   price: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.DECIMAL,
     allowNull: false
   },
   quantity: {
@@ -25,4 +25,7 @@ const Product = db.define('product', {
   }
 })
 
+Product.prototype.quantityUpdate = function(qtyNum) {
+  return (this.quantity -= qtyNum) //only run when a person has checked out
+}
 module.exports = Product

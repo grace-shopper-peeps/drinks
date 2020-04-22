@@ -1,7 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product, Category, Orders} = require('../server/db/models')
+const {
+  User,
+  Product,
+  Category,
+  Orders,
+  ProductOrders
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -12,6 +18,7 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'}),
     User.create({email: 'claire@email.com', password: 'quarantini'})
   ])
+
   const categories = await Promise.all([Category.create({name: 'Vodka'})])
 
   const products = await Promise.all([
@@ -31,12 +38,23 @@ async function seed() {
   ])
 
   const orders = await Promise.all([
-    Orders.create({price: 22, quantity: 2, productId: 1})
+    Orders.create({price: 22, quantity: 2, userId: 3}) // how does our through table know how many products per order we get?
+    //order can have qty total but it also needs to get the productId and orderId from the thorugh table to display in  the order
   ])
+
+  const productOrder = await Promise.all([
+    ProductOrders.create({quantity: 3, orderId: 1, productId: 1})
+  ])
+
+  // const productOrder = await Promise.all([
+  //   ProductOrders.create({quantity: 3}), //how do we get the current price of the product with the productId into this model instance?
+  // ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${orders.length} orders`)
+  console.log(`seeded ${categories.length} categories`)
+  console.log(`seeded ${productOrder.length} product-order`)
   console.log(`seeded successfully`)
 }
 
