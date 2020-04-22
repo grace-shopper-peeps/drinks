@@ -1,9 +1,14 @@
 import React from 'react'
-import {fetchProductThunk} from '../store.product'
+import {fetchProductThunk} from '../store/product'
 import {connect} from 'react-redux'
 
 export class Product extends React.Component {
+  componentDidMount() {
+    this.props.getProduct(this.props.match.params.productId)
+  }
+
   render() {
+    console.log(this.state)
     return (
       <div>
         <h3>PRODUCT NAME HERE</h3>
