@@ -13,7 +13,7 @@ class Products extends React.Component {
         <div>
           {this.props.products.map(product => {
             return (
-              <div key={product.id}>
+              <div className="drinks" key={product.id}>
                 <img src={product.image} />
                 <h3>Title: </h3>
                 <p>{product.title}</p>
