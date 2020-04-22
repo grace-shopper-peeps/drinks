@@ -5,6 +5,7 @@ const Review = require('./reviews')
 const Guest = require('./guest')
 const Category = require('./category')
 const Cart = require('./cart')
+const ProductOrders = require('./product-orders')
 
 Category.hasMany(Product)
 Product.belongsTo(Category)
@@ -30,8 +31,8 @@ Review.belongsTo(User)
 Product.hasMany(Review)
 Review.belongsTo(Product)
 
-Orders.belongsToMany(Product, {through: 'Prod/Ord'})
-Product.belongsToMany(Orders, {through: 'Prod/Ord'})
+Orders.belongsToMany(Product, {through: ProductOrders})
+Product.belongsToMany(Orders, {through: ProductOrders})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -45,5 +46,6 @@ module.exports = {
   Orders,
   Review,
   Guest,
-  Category
+  Category,
+  ProductOrders
 }
