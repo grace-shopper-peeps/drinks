@@ -19,3 +19,7 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+.drinks {
+  border: solid purple;
+  background-color: skyblue;
+}
