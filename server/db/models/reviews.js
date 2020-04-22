@@ -9,6 +9,9 @@ const Review = db.define('review', {
   text: {
     type: Sequelize.TEXT,
     allowNull: false
+  },
+  rating: {
+    type: Sequelize.DECIMAL
   }
 })
 

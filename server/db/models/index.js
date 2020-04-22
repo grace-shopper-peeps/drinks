@@ -2,9 +2,9 @@ const User = require('./user')
 const Product = require('./product')
 const Orders = require('./orders')
 const Review = require('./reviews')
-const Guest = require('./guest')
+// const Guest = require('./guest')
 const Category = require('./category')
-const Cart = require('./cart')
+const ProductOrders = require('./product-orders')
 
 Category.hasMany(Product)
 Product.belongsTo(Category)
@@ -12,17 +12,8 @@ Product.belongsTo(Category)
 Orders.belongsTo(User)
 User.hasMany(Orders)
 
-Guest.belongsTo(Orders)
-Orders.hasOne(Guest)
-
-Orders.hasOne(Cart)
-Cart.belongsTo(Orders)
-
-User.hasOne(Cart)
-Cart.belongsTo(User)
-
-Guest.hasOne(Cart)
-Cart.belongsTo(Guest)
+// Guest.belongsTo(Orders)
+// Orders.hasOne(Guest)
 
 User.hasMany(Review)
 Review.belongsTo(User)
@@ -30,8 +21,8 @@ Review.belongsTo(User)
 Product.hasMany(Review)
 Review.belongsTo(Product)
 
-Orders.belongsToMany(Product, {through: 'Prod/Ord'})
-Product.belongsToMany(Orders, {through: 'Prod/Ord'})
+Orders.belongsToMany(Product, {through: ProductOrders})
+Product.belongsToMany(Orders, {through: ProductOrders})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -44,6 +35,7 @@ module.exports = {
   Product,
   Orders,
   Review,
-  Guest,
-  Category
+  // Guest,
+  Category,
+  ProductOrders
 }

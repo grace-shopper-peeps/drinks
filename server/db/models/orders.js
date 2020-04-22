@@ -8,6 +8,9 @@ const Order = db.define('order', {
   },
   quantity: {
     type: Sequelize.INTEGER
+  },
+  status: {
+    type: Sequelize.ENUM('Created', 'Processing', 'Cancelled', 'Completed')
   }
 })
 
