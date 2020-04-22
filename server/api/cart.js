@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
   } else {
     req.session.cart++
   }
-  res.json('Hello')
+  res.json('Hello World')
 })
 
 module.exports = router

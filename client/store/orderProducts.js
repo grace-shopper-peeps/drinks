@@ -7,7 +7,7 @@ export const getOrderProducts = products => ({
   products
 })
 
-export const fetchOrderProducts = orderId => {
+export const fetchOrderProducts = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`api/cart/`)
