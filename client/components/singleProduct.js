@@ -1,7 +1,7 @@
 import React from 'react'
 import {fetchProductThunk} from '../store/product'
 import {connect} from 'react-redux'
-
+import AddToCart from './addToCart'
 export class Product extends React.Component {
   componentDidMount() {
     this.props.getProduct(this.props.match.params.productId)
@@ -15,6 +15,7 @@ export class Product extends React.Component {
         <img src={product.image} />
         <div>{`Price: ${product.price}`}</div>
         <p>{`Description: ${product.description}`}</p>
+        <AddToCart />
       </div>
     )
   }
