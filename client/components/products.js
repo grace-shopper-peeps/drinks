@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getAllProducts} from '../store/products'
 import {Link} from 'react-router-dom'
+import AddToCart from './addToCart'
 
 class Products extends React.Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ class Products extends React.Component {
         <div>
           {this.props.products.map(product => {
             return (
-              <div key={product.id}>
+              <div className="drinks" key={product.id}>
                 <Link to={`/products/${product.id}`}>
                   <img src={product.image} />
                   <h3>Title: </h3>
@@ -28,6 +29,7 @@ class Products extends React.Component {
                 <p>{product.quantity}</p>
                 <h3>Type: </h3>
                 <p>{product.category ? product.category.name : 'null'}</p>
+                <AddToCart />
               </div>
             )
           })}

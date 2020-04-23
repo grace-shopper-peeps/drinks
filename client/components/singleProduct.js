@@ -3,7 +3,7 @@ import {fetchProductThunk} from '../store/product'
 import {connect} from 'react-redux'
 import {ProductReviews} from './singleProductReviews'
 import {getAllReviews} from '../store/reviews'
-
+import AddToCart from './addToCart'
 export class Product extends React.Component {
   componentDidMount() {
     this.props.getProduct(this.props.match.params.productId)
@@ -26,6 +26,7 @@ export class Product extends React.Component {
           reviews={reviews}
           productId={product.id}
         />
+        <AddToCart product={product} />
       </div>
     )
   }
