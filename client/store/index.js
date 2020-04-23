@@ -7,12 +7,14 @@ import singleProductReducer from './product'
 import allProductsReducer from './products'
 import order from './order'
 import orderProducts from './orderProducts'
+import allReviewsReducer from './reviews'
 
 const reducer = combineReducers({
   user,
   product: singleProductReducer,
   products: allProductsReducer,
   order,
+  reviews: allReviewsReducer,
   orderProducts
 })
 

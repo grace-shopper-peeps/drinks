@@ -10,6 +10,16 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const userReviews = await Reviews.findByPk(req.params.userId)
+    res.json(userReviews)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //might need to be changed
 router.get('/:guestId', async (req, res, next) => {
   try {
