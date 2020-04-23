@@ -9,10 +9,10 @@ const allReviews = reviews => {
   }
 }
 
-export const getAllReviews = productId => {
+export const getAllReviews = () => {
   return async dispatch => {
     try {
-      const response = await axios.get('/api/reviews', productId)
+      const response = await axios.get('/api/reviews')
       const reviews = response.data
       dispatch(allReviews(reviews))
     } catch (err) {
