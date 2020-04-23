@@ -7,7 +7,13 @@ export class ProductReviews extends React.Component {
       <div>
         {reviewList.map(review => {
           if (review.productId === this.props.productId) {
-            return <div key={review.id}>{review.title}</div>
+            return (
+              <div key={review.id}>
+                <h4>{review.title}</h4>
+                <h5>Rating: {review.rating}</h5>
+                <p>{review.text}</p>
+              </div>
+            )
           }
         })}
       </div>
