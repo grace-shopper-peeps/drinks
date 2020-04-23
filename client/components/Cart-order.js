@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchOrder} from '../store/order'
-import {fetchOrderProducts} from '../store/orderProducts'
+import {fetchOrderProducts} from '../store/cart'
 
 class Order extends React.Component {
   componentDidMount() {
@@ -37,7 +37,7 @@ class Order extends React.Component {
 }
 
 const mapState = state => ({
-  orderProducts: state.orderProducts,
+  cart: state.cart,
   order: state.order
 })
 

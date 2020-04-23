@@ -27,7 +27,7 @@ export const fetchOrderProducts = () => {
 export const addProductToCart = product => {
   return async dispatch => {
     try {
-      const {data} = await axios.get('/api/cart', product)
+      const {data} = await axios.post('/api/cart', product)
       dispatch(addProducts(data))
     } catch (err) {
       console.log('could not add product to cart')
@@ -37,7 +37,7 @@ export const addProductToCart = product => {
 
 const initialState = []
 
-export default function orderProducts(state = initialState, action) {
+export default function cart(state = initialState, action) {
   switch (action.type) {
     case GET_ORDER_PRODUCTS:
       return action.products

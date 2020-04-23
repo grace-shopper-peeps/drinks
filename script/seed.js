@@ -39,12 +39,17 @@ async function seed() {
   ])
 
   const orders = await Promise.all([
-    Orders.create({price: 22, quantity: 2, userId: 3}) // how does our through table know how many products per order we get?
+    Orders.create({price: 22, quantity: 2, userId: 3}),
+    Orders.create({price: 50, quantity: 3, userId: 2})
+    // how does our through table know how many products per order we get?
     //order can have qty total but it also needs to get the productId and orderId from the thorugh table to display in  the order
   ])
 
   const productOrder = await Promise.all([
-    ProductOrders.create({quantity: 3, orderId: 1, productId: 1})
+    ProductOrders.create({quantity: 3, orderId: 1, productId: 1}),
+    ProductOrders.create({quantity: 2, orderId: 1, productId: 2}),
+    ProductOrders.create({quantity: 5, orderId: 2, productId: 1}),
+    ProductOrders.create({quantity: 7, orderId: 2, productId: 2})
   ])
 
   const reviews = await Promise.all([
