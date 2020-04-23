@@ -9,13 +9,14 @@ export class Product extends React.Component {
 
   render() {
     let product = this.props.product
+    console.log('product', product)
     return (
       <div>
         <h3>{product.title}</h3>
         <img src={product.image} />
         <div>{`Price: ${product.price}`}</div>
         <p>{`Description: ${product.description}`}</p>
-        <AddToCart />
+        <AddToCart product={product} />
       </div>
     )
   }
