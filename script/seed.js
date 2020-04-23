@@ -6,7 +6,8 @@ const {
   Product,
   Category,
   Orders,
-  ProductOrders
+  ProductOrders,
+  Review
 } = require('../server/db/models')
 
 async function seed() {
@@ -46,6 +47,30 @@ async function seed() {
     ProductOrders.create({quantity: 3, orderId: 1, productId: 1})
   ])
 
+  const reviews = await Promise.all([
+    Review.create({
+      title: 'what a great product',
+      text: 'this martini is the best martini i have ever had',
+      rating: 5.0,
+      userId: 3,
+      productId: 1
+    }),
+    Review.create({
+      title: 'hated it',
+      text: 'ew this was gross',
+      rating: 1.0,
+      userId: 3,
+      productId: 2
+    }),
+    Review.create({
+      title: 'pretty good',
+      text: 'i enjoyed this product',
+      rating: 5.0,
+      userId: 2,
+      productId: 2
+    })
+  ])
+
   // const productOrder = await Promise.all([
   //   ProductOrders.create({quantity: 3}), //how do we get the current price of the product with the productId into this model instance?
   // ])
@@ -55,6 +80,7 @@ async function seed() {
   console.log(`seeded ${orders.length} orders`)
   console.log(`seeded ${categories.length} categories`)
   console.log(`seeded ${productOrder.length} product-order`)
+  console.log(`seeded ${reviews.length} orders`)
   console.log(`seeded successfully`)
 }
 
