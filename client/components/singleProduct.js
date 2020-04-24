@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import AddToCart from './addToCart'
 import {ProductReviews} from './singleProductReviews'
 import {getAllReviews} from '../store/reviews'
+import DeleteProduct from './deleteProduct'
 
 export class Product extends React.Component {
   componentDidMount() {
@@ -14,8 +15,7 @@ export class Product extends React.Component {
   render() {
     let product = this.props.product
     let reviews = this.props.reviews
-    console.log(this.props)
-    console.log('product', product)
+    let user = this.props.user
     return (
       <div>
         <h3>{product.title}</h3>
@@ -29,6 +29,7 @@ export class Product extends React.Component {
           productId={product.id}
         />
         <AddToCart product={product} />
+        {user && user.isAdmin ? <DeleteProduct product={product} /> : ''}
       </div>
     )
   }
@@ -36,7 +37,8 @@ export class Product extends React.Component {
 
 export const mapStateToProps = state => ({
   product: state.product,
-  reviews: state.reviews
+  reviews: state.reviews,
+  user: state.user
 })
 
 export const mapDispatchToProps = dispatch => {

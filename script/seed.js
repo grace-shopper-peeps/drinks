@@ -17,12 +17,55 @@ async function seed() {
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'}),
-    User.create({email: 'claire@email.com', password: 'quarantini'})
+    User.create({
+      email: 'claire@email.com',
+      password: 'quarantini',
+      isAdmin: true
+    })
   ])
 
   const categories = await Promise.all([Category.create({name: 'Vodka'})])
 
   const products = await Promise.all([
+    Product.create({
+      title: 'Martini',
+      description: 'Glorified way to drink liquor straight',
+      price: 12,
+      quantity: 5,
+      categoryId: 1
+    }),
+    Product.create({
+      title: 'Moscow Mule',
+      description: 'Everyone likes it because you get it in a copper mug',
+      price: 10,
+      quantity: 10
+    }),
+    Product.create({
+      title: 'Martini',
+      description: 'Glorified way to drink liquor straight',
+      price: 12,
+      quantity: 5,
+      categoryId: 1
+    }),
+    Product.create({
+      title: 'Moscow Mule',
+      description: 'Everyone likes it because you get it in a copper mug',
+      price: 10,
+      quantity: 10
+    }),
+    Product.create({
+      title: 'Martini',
+      description: 'Glorified way to drink liquor straight',
+      price: 12,
+      quantity: 5,
+      categoryId: 1
+    }),
+    Product.create({
+      title: 'Moscow Mule',
+      description: 'Everyone likes it because you get it in a copper mug',
+      price: 10,
+      quantity: 10
+    }),
     Product.create({
       title: 'Martini',
       description: 'Glorified way to drink liquor straight',
