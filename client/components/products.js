@@ -11,6 +11,7 @@ class Products extends React.Component {
     console.log(this.props)
   }
   render() {
+    const user = this.props.user
     return (
       <div>
         <div>
@@ -31,7 +32,11 @@ class Products extends React.Component {
                 <h3>Type: </h3>
                 <p>{product.category ? product.category.name : 'null'}</p>
                 <AddToCart />
-                <DeleteProduct product={product} />
+                {user && user.isAdmin ? (
+                  <DeleteProduct product={product} />
+                ) : (
+                  ''
+                )}
               </div>
             )
           })}
@@ -43,7 +48,8 @@ class Products extends React.Component {
 //hello
 const mapState = state => {
   return {
-    products: state.products
+    products: state.products,
+    user: state.user
   }
 }
 const mapDispatch = dispatch => {
