@@ -17,7 +17,6 @@ export class Product extends React.Component {
     console.log('product', product)
     let reviews = this.props.reviews
     console.log(this.props)
-    let reviews = this.props.reviews
     let user = this.props.user
     return (
       <div>
