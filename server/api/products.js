@@ -42,3 +42,13 @@ router.delete('/:productId', isAdmin, async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:productId', isAdmin, async (req, res, next) => {
+  try {
+    const productToUpdate = await Product.findByPk(req.params.productId)
+    const updatedProduct = await productToUpdate.update(req.body)
+    res.json(updatedProduct)
+  } catch (err) {
+    next(err)
+  }
+})

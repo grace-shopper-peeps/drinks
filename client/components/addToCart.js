@@ -1,5 +1,5 @@
 import React from 'react'
-import {addProductToCart} from '../store/orderProducts'
+import {addProductToCart} from '../store/cart'
 import {connect} from 'react-redux'
 
 class AddToCart extends React.Component {
@@ -9,9 +9,13 @@ class AddToCart extends React.Component {
   }
   render() {
     // const productId = this.props.id
-    const product = this.props.product
     return (
-      <button type="submit" onClick={() => this.addProduct(product)}>
+      <button
+        type="submit"
+        onClick={() =>
+          this.addProduct({productId: 1, quantity: 15, price: 25.0})
+        }
+      >
         Add To Cart
       </button>
     )
