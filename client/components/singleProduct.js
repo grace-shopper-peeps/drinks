@@ -15,19 +15,20 @@ export class Product extends React.Component {
     let product = this.props.product
     let reviews = this.props.reviews
     console.log(this.props)
+    console.log('product', product)
     return (
       <div>
         <h3>{product.title}</h3>
         <img src={product.image} />
         <div>{`Price: ${product.price}`}</div>
         <p>{`Description: ${product.description}`}</p>
-        <AddToCart />
         <div>Reviews: </div>
         <ProductReviews
           key={product.id}
           reviews={reviews}
           productId={product.id}
         />
+        <AddToCart product={product} />
       </div>
     )
   }

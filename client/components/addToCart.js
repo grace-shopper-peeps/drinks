@@ -1,7 +1,25 @@
 import React from 'react'
+import {addProductToCart} from '../store/orderProducts'
+import {connect} from 'react-redux'
 
-const AddToCart = props => {
-  return <button>Add To Cart</button>
+class AddToCart extends React.Component {
+  addProduct(product) {
+    console.log('clicked')
+    this.props.addItem(product)
+  }
+  render() {
+    // const productId = this.props.id
+    const product = this.props.product
+    return (
+      <button type="submit" onClick={() => this.addProduct(product)}>
+        Add To Cart
+      </button>
+    )
+  }
 }
+// const AddToCart = props => {
+const mapDispatch = dispatch => ({
+  addItem: product => dispatch(addProductToCart(product))
+})
 
-export default AddToCart
+export default connect(null, mapDispatch)(AddToCart)
