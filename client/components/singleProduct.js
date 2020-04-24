@@ -22,13 +22,13 @@ export class Product extends React.Component {
         <img src={product.image} />
         <div>{`Price: ${product.price}`}</div>
         <p>{`Description: ${product.description}`}</p>
+        <AddToCart product={product} />
         <div>Reviews: </div>
         <ProductReviews
           key={product.id}
           reviews={reviews}
           productId={product.id}
         />
-        <AddToCart product={product} />
         {user && user.isAdmin ? <DeleteProduct product={product} /> : ''}
       </div>
     )
