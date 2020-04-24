@@ -25,11 +25,14 @@ class Cart extends React.Component {
             return (
               <p>
                 prouctId:
-                <b>{cartItem.productId}</b>
+                <b>{cartItem.id}</b>
                 ---- qty:
                 <b>{cartItem.quantity}</b>
                 ---- price:
                 <b>{cartItem.price}</b>
+                -----total Price:
+                <b>{/* {cartItem.products.map()
+                  )} */}</b>
               </p>
             )
           })}

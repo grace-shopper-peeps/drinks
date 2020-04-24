@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const ProductOrders = db.define('product-orders', {
+const ProductOrders = db.define('throughProductOrders', {
   //   orderId: {
   //     type: Sequelize.INTEGER,
   //     allowNull: false,
@@ -25,8 +25,8 @@ const ProductOrders = db.define('product-orders', {
   }
 })
 
-ProductOrders.prototype.productTotal = function() {
-  this.purchasePrice = this.quantity * this.price
-}
+ProductOrders.addHook('beforeCreate', (instance, options) => {
+  return (instance.purchasePrice = instance.quantity * instance.price)
+})
 
 module.exports = ProductOrders

@@ -4,21 +4,45 @@ const Product = require('../db/models/product')
 const Orders = require('../db/models/orders')
 
 router.get('/', async (req, res, next) => {
-  try {
-    if (req.user) {
-      //   const userOrders = await req.user.getOrders()
-      const dummyOrder = await ProductOrders.findAll({
-        where: {
-          orderId: 1
+  if (req.user) {
+    const newOrder = await Orders.findAll({
+      where: {
+        userId: req.user.id,
+        status: 'Created'
+      },
+      include: [
+        {
+          model: Product,
+          through: ProductOrders
         }
-      })
-      console.log('BUMMMMYYY', dummyOrder)
+      ]
+    })
 
-      res.json(dummyOrder)
-    }
-  } catch (err) {
-    next(err)
+    console.log('HUUUUUUGGGEE', newOrder)
+    res.json(newOrder)
+  } else {
+    res.json(['no cart found'])
   }
+
+  //   try {
+  //     if (req.user) {
+  //       req.user.id = 3
+  //   const userOrders = await req.user.getOrders()
+  //   const dummyOrder = await ProductOrders.findAll({
+  //     where: {
+  //       orderId: 1,
+  //     },
+  //     // include: {model: Product},
+  //   })
+  //   console.log('USERRRR', req.user)
+  //   const userOrders = await req.user.getOrders()
+  //   console.log('CLAIRESS ORDER', userOrders)
+
+  //       res.json(['honey', 'bee', 'margs'])
+  //     }
+  //   } catch (err) {
+  //     next(err)
+  //   }
 })
 
 router.post('/', async (req, res, next) => {
