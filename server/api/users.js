@@ -1,8 +1,9 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+const isAdmin = require('./middleware/isAdmin')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
@@ -30,6 +31,20 @@ router.post('/', async (req, res, next) => {
     const users = await User.create(req.body)
     res.json(users)
   } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:userId', isAdmin, async (req, res, next) => {
+  try {
+    const userForDeletion = await User.findByPk(req.params.userId)
+    await userForDeletion.destroy()
+    console.log(
+      'is this route goind through ??????????????????????????????????????'
+    )
+    res.sendStatus(204)
+  } catch (err) {
+    res.json(err)
     next(err)
   }
 })
