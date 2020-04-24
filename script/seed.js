@@ -39,6 +39,45 @@ async function seed() {
       description: 'Everyone likes it because you get it in a copper mug',
       price: 10,
       quantity: 10
+    }),
+    Product.create({
+      title: 'Martini',
+      description: 'Glorified way to drink liquor straight',
+      price: 12,
+      quantity: 5,
+      categoryId: 1
+    }),
+    Product.create({
+      title: 'Moscow Mule',
+      description: 'Everyone likes it because you get it in a copper mug',
+      price: 10,
+      quantity: 10
+    }),
+    Product.create({
+      title: 'Martini',
+      description: 'Glorified way to drink liquor straight',
+      price: 12,
+      quantity: 5,
+      categoryId: 1
+    }),
+    Product.create({
+      title: 'Moscow Mule',
+      description: 'Everyone likes it because you get it in a copper mug',
+      price: 10,
+      quantity: 10
+    }),
+    Product.create({
+      title: 'Martini',
+      description: 'Glorified way to drink liquor straight',
+      price: 12,
+      quantity: 5,
+      categoryId: 1
+    }),
+    Product.create({
+      title: 'Moscow Mule',
+      description: 'Everyone likes it because you get it in a copper mug',
+      price: 10,
+      quantity: 10
     })
   ])
 

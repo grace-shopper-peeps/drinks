@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {getAllProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import AddToCart from './addToCart'
+import DeleteProduct from './deleteProduct'
 
 class Products extends React.Component {
   componentDidMount() {
@@ -30,6 +31,7 @@ class Products extends React.Component {
                 <h3>Type: </h3>
                 <p>{product.category ? product.category.name : 'null'}</p>
                 <AddToCart />
+                <DeleteProduct product={product} />
               </div>
             )
           })}

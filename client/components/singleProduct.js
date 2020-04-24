@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import {ProductReviews} from './singleProductReviews'
 import {getAllReviews} from '../store/reviews'
 import AddToCart from './addToCart'
+import DeleteProduct from './deleteProduct'
+
 export class Product extends React.Component {
   componentDidMount() {
     this.props.getProduct(this.props.match.params.productId)
@@ -27,6 +29,7 @@ export class Product extends React.Component {
           productId={product.id}
         />
         <AddToCart product={product} />
+        <DeleteProduct product={product} />
       </div>
     )
   }
