@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllUsers} from '../store/allUsers'
+import DeleteUser from './deleteUser'
 
 export class UserList extends React.Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ export class UserList extends React.Component {
               <div key={eachUser.id}>
                 <h3>User Email:</h3>
                 <div>{eachUser.email}</div>
+                <DeleteUser eachUser={eachUser} />
               </div>
             )
           })}
