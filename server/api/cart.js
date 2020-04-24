@@ -1,6 +1,25 @@
 const router = require('express').Router()
 const ProductOrders = require('../db/models/product-orders')
+const Product = require('../db/models/product')
 const Orders = require('../db/models/orders')
+
+router.get('/', async (req, res, next) => {
+  try {
+    if (req.user) {
+      //   const userOrders = await req.user.getOrders()
+      const dummyOrder = await ProductOrders.findAll({
+        where: {
+          orderId: 1
+        }
+      })
+      console.log('BUMMMMYYY', dummyOrder)
+
+      res.json(dummyOrder)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.post('/', async (req, res, next) => {
   //check post and put routes when we get from lunch

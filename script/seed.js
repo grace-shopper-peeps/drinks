@@ -45,11 +45,12 @@ async function seed() {
     //order can have qty total but it also needs to get the productId and orderId from the thorugh table to display in  the order
   ])
 
+  //how are we going to get the static individual price?
   const productOrder = await Promise.all([
-    ProductOrders.create({quantity: 3, orderId: 1, productId: 1}),
-    ProductOrders.create({quantity: 2, orderId: 1, productId: 2}),
-    ProductOrders.create({quantity: 5, orderId: 2, productId: 1}),
-    ProductOrders.create({quantity: 7, orderId: 2, productId: 2})
+    ProductOrders.create({quantity: 3, orderId: 1, productId: 1, price: 12.0}),
+    ProductOrders.create({quantity: 2, orderId: 1, productId: 2, price: 10.0}),
+    ProductOrders.create({quantity: 5, orderId: 2, productId: 1, price: 12.0}),
+    ProductOrders.create({quantity: 7, orderId: 2, productId: 2, price: 10.0})
   ])
 
   const reviews = await Promise.all([

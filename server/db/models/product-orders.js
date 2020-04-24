@@ -18,7 +18,15 @@ const ProductOrders = db.define('product-orders', {
     //perhaps to keep track of the price at which a product was purchased at? think about when you would populate this column
     type: Sequelize.INTEGER,
     defaultValue: null
+  },
+  price: {
+    type: Sequelize.DECIMAL,
+    defaultValue: null
   }
 })
+
+ProductOrders.prototype.productTotal = function() {
+  this.purchasePrice = this.quantity * this.price
+}
 
 module.exports = ProductOrders

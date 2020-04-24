@@ -9,7 +9,6 @@ class AddToCart extends React.Component {
   }
   render() {
     // const productId = this.props.id
-    const product = this.props.product
     return (
       <button
         type="submit"

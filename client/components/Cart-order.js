@@ -1,12 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchOrder} from '../store/order'
 import {fetchOrderProducts} from '../store/cart'
 
-class Order extends React.Component {
+class Cart extends React.Component {
   componentDidMount() {
-    this.props.getOrderProducts(orderId) // go to the back and fetch all products in order-product table with associated orderId
-    this.props.getOrder(orderId) // need to get orderID from props passed from SingleDrink or AllDrinks component or pull it from the front
+    this.props.getCart() // go to the back and fetch all products in order-product table with associated orderId
+    // need to get orderID from props passed from SingleDrink or AllDrinks component or pull it from the front
   }
 
   removeItem(item) {
@@ -14,36 +13,39 @@ class Order extends React.Component {
   }
 
   render() {
-    const cartItems = this.props.drinks
-    const totalOrder = this.props.order
-
+    const cartItems = this.props.cart
+    console.log('hey')
+    //check instance method on order-price in db
+    //need image and title from Product table
     return (
       <div>
         <h1>Cart Summary:</h1>
         <div>
           {cartItems.map(cartItem => {
             return (
-              <div>
-                {cartItem.imageUrl}-{cartItem.title}-{cartItem.price}-
-                {cartItem.quantity}
-              </div>
+              <p>
+                prouctId:
+                <b>{cartItem.productId}</b>
+                ---- qty:
+                <b>{cartItem.quantity}</b>
+                ---- price:
+                <b>{cartItem.price}</b>
+              </p>
             )
           })}
         </div>
-        {totalOrder.quantity}-{totalOrder.price}
+        <b>Total Items: {cartItems.length}</b>
       </div>
     )
   }
 }
 
 const mapState = state => ({
-  cart: state.cart,
-  order: state.order
+  cart: state.cart
 })
 
 const mapDispatch = dispatch => ({
-  getOrderProducts: () => dispatch(fetchOrderProducts()),
-  getOrder: orderId => dispatch(fetchOrder(orderId))
+  getCart: () => dispatch(fetchOrderProducts())
 })
 
-export default connect(mapState, mapDispatch)(Order)
+export default connect(mapState, mapDispatch)(Cart)
