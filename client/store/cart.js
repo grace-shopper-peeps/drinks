@@ -35,15 +35,15 @@ export const addProductToCart = product => {
   }
 }
 
-const initialState = []
-
-export default function cart(state = initialState, action) {
+function cart(state = [], action) {
   switch (action.type) {
     case GET_ORDER_PRODUCTS:
-      return action.products
+      return [...state, action.products]
     case ADD_PRODUCT:
       return [...state, action.addedProducts]
     default:
       return state
   }
 }
+
+export default cart
