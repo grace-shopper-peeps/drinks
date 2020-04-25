@@ -27,6 +27,7 @@ export const deleteUserThunk = id => {
   return async dispatch => {
     try {
       await axios.delete(`api/users/${id}`, id)
+      console.log('is the thunk going through ')
       dispatch(deleteUser(id))
     } catch (err) {
       console.log(err)
@@ -41,6 +42,7 @@ const allUsersReducer = (state = initialState, action) => {
     case GET_ALL_USERS:
       return action.users
     case DELETE_USER:
+      console.log(action, 'action')
       return [...state].filter(user => {
         if (user.id !== action.id) {
           return user

@@ -4,7 +4,6 @@ import {getAllProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import AddToCart from './addToCart'
 import DeleteProduct from './deleteProduct'
-import UpdateProduct from './UpdateProduct'
 
 class Products extends React.Component {
   componentDidMount() {
