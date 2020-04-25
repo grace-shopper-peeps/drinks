@@ -18,8 +18,8 @@ router.get('/', async (req, res, next) => {
       ]
     })
 
-    console.log('HUUUUUUGGGEE', newOrder)
-    res.json(newOrder)
+    console.log('NEWW ORDDEEERRR', newOrder[0].products)
+    res.json(newOrder[0].products)
   } else {
     res.json(['no cart found'])
   }
@@ -55,30 +55,44 @@ router.post('/', async (req, res, next) => {
       where: {
         status: 'Created',
         userId: req.user.id
-      }
+      },
+      include: [
+        {
+          model: Product,
+          through: ProductOrders
+        }
+      ]
     })
-    // console.log('testing ORDER', orderExist[0])
+    // console.log('LETS SEE THE MAGIC ', orderExist[0].__proto__)
+    // console.log('testing ORDER', orderExist[0].products)
 
     if (orderExist[0]) {
-      ;(orderExist[0].quantity += req.body.quantity),
-        (orderExist[0].price += req.body.price)
-      req.body.orderId = orderExist[0].id
-      await ProductOrders.create(req.body)
-      res.json(orderExist[0])
+      //doesn't like this formatting
+      console.log('BERRRRIES')
+      console.log('SUUUUPP', orderExist)
+      const selectedProduct = await Product.findAll({
+        where: {
+          id: req.body.productId // it's req.body.id not productId
+        }
+      })
+      //   await ProductOrders.create(req.body)
+      const updatedOrder = orderExist[0].addProduct(selectedProduct[0])
+      //   console.log('ORANGGGGGESSS', orderExist[0].products)
+      res.json(selectedProduct[0])
 
       console.log('BANANANAS', orderExist)
       console.log('STRRRAWWBBEYEYYY', req.body)
     } else {
+      console.log('FRRRUUIIIIT')
       const newOrder = await Orders.create({
         userId: req.user.id,
-        status: 'Created',
-        quantity: req.body.quantity,
-        price: req.body.price
+        status: 'Created'
       })
+      newOrder.addProduct(req.body)
       console.log('GRAPESSS', newOrder)
       req.body.orderId = newOrder.id
       await ProductOrders.create(req.body)
-      res.json(newOrder)
+      res.json(req.body)
     }
 
     // console.log('REQ BODYDDDDDYYY', req.body)

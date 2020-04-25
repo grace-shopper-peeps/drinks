@@ -117,6 +117,7 @@ async function seed() {
   const productOrder = await Promise.all([
     ProductOrders.create({quantity: 3, orderId: 1, productId: 1, price: 12.0}),
     ProductOrders.create({quantity: 2, orderId: 1, productId: 2, price: 10.0}),
+    ProductOrders.create({quantity: 6, orderId: 1, productId: 3, price: 13.0}),
     ProductOrders.create({quantity: 5, orderId: 2, productId: 1, price: 12.0}),
     ProductOrders.create({quantity: 7, orderId: 2, productId: 2, price: 10.0})
   ])
