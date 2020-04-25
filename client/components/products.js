@@ -13,37 +13,41 @@ class Products extends React.Component {
   }
   render() {
     const user = this.props.user
+    console.log(this.props, 'this.props of products')
     return (
       <div>
         <div>
-          {this.props.products.map(product => {
-            return (
-              <div className="drinks" key={product.id}>
-                <Link to={`/products/${product.id}`}>
-                  <img src={product.image} />
-                  <h3>Title: </h3>
-                  <p>{product.title}</p>
-                </Link>
-                <h3>Description: </h3>
-                <p>{product.description}</p>
-                <h3>Price: </h3>
-                <p>{product.price}</p>
-                <h3>Quantity: </h3>
-                <p>{product.quantity}</p>
-                <h3>Type: </h3>
-                <p>{product.category ? product.category.name : 'null'}</p>
-                <AddToCart />
-                {user && user.isAdmin ? (
-                  <div>
-                    <DeleteProduct product={product} />
-                    <UpdateProduct productId={product.id} />
-                  </div>
-                ) : (
-                  ''
-                )}
-              </div>
-            )
-          })}
+          {this.props.products ? (
+            this.props.products.map(product => {
+              return (
+                <div className="drinks" key={product.id}>
+                  <Link to={`/products/${product.id}`}>
+                    <img src={product.image} />
+                    <h3>Title: </h3>
+                    <p>{product.title}</p>
+                  </Link>
+                  <h3>Description: </h3>
+                  <p>{product.description}</p>
+                  <h3>Price: </h3>
+                  <p>{product.price}</p>
+                  <h3>Quantity: </h3>
+                  <p>{product.quantity}</p>
+                  <h3>Type: </h3>
+                  <p>{product.category ? product.category.name : 'null'}</p>
+                  <AddToCart />
+                  {user && user.isAdmin ? (
+                    <div>
+                      <DeleteProduct product={product} />
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </div>
+              )
+            })
+          ) : (
+            <div> Loading </div>
+          )}
         </div>
       </div>
     )

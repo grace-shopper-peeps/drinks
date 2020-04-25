@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import updateProductThunk from '../store/products'
+import {updateProductThunk} from '../store/products'
 class UpdateProduct extends React.Component {
   constructor() {
     super()
@@ -10,7 +10,7 @@ class UpdateProduct extends React.Component {
       price: '',
       quantity: '',
       image: '',
-      type: ''
+      category: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -23,8 +23,10 @@ class UpdateProduct extends React.Component {
   }
 
   handleSubmit(event) {
+    console.log('this state in handle submit: ', this.state)
+    console.log('this props in HS ', this.props)
     event.preventDefault()
-    this.props.updateProduct(this.state, this.props.productId)
+    this.props.updateProd(this.state, this.props.productId)
   }
   render() {
     return (
@@ -62,9 +64,9 @@ class UpdateProduct extends React.Component {
           />
           <input
             onChange={this.handleChange}
-            value={this.state.type}
-            name="type"
-            placeholder="type"
+            value={this.state.category}
+            name="category"
+            placeholder="category"
           />
           <button type="submit">Submit</button>
         </form>
@@ -80,7 +82,7 @@ const mapState = state => {
 }
 const mapDispatch = dispatch => {
   return {
-    updateProduct: (product, id) => dispatch(updateProductThunk(product, id))
+    updateProd: (product, id) => dispatch(updateProductThunk(product, id))
   }
 }
 export default connect(mapState, mapDispatch)(UpdateProduct)

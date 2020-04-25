@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const SET_SINGLE_PRODUCT = 'SET_SINGLE_PRODUCT'
 export const DELETE_SINGLE_PRODUCT = 'DELETE_SINGLE_PRODUCT'
-//const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 
 export const setSingleProduct = product => {
   return {
@@ -18,13 +18,13 @@ export const deleteSingleProduct = id => {
   }
 }
 
-// const updateProduct = (product) => {
-//   console.log('product', product)
-//   return {
-//     type: UPDATE_PRODUCT,
-//     product
-//   }
-// }
+export const updateProduct = product => {
+  console.log('IS THIS BEING CALLED??????????')
+  return {
+    type: UPDATE_PRODUCT,
+    product
+  }
+}
 
 export const fetchProductThunk = id => {
   return async dispatch => {
@@ -38,16 +38,18 @@ export const fetchProductThunk = id => {
   }
 }
 
-// export const updateProductThunk = (product, id) => {
-//   return async dispatch => {
-//     try {
-//       const {data} = await axios.put(`/api/products/${id}`, product)
-//       dispatch(updateProduct(data))
-//     } catch (err) {
-//       console.log('there was an error deleting the product: ', err)
-//     }
-//   }
-// }
+export const updateProductThunk = (product, id) => {
+  return async dispatch => {
+    try {
+      console.log('IS THIS WORKING??????? THE THUNK')
+      const response = await axios.put(`/api/products/${id}`, product)
+      let newProduct = response.data
+      dispatch(updateProduct(newProduct))
+    } catch (err) {
+      console.log('there was an error updating the product: ', err)
+    }
+  }
+}
 
 export const deleteProductThunk = id => {
   return async dispatch => {
@@ -68,8 +70,8 @@ export default function singleProductReducer(state = initialState, action) {
       return action.product
     case DELETE_SINGLE_PRODUCT:
       return {}
-    // case UPDATE_PRODUCT:
-    //   return action.product
+    case UPDATE_PRODUCT:
+      return action.product
     default:
       return state
   }

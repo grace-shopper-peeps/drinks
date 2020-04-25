@@ -24,20 +24,20 @@ export class Product extends React.Component {
         <div>{`Price: ${product.price}`}</div>
         <p>{`Description: ${product.description}`}</p>
         <AddToCart product={product} />
+        {user && user.isAdmin ? (
+          <div>
+            <DeleteProduct product={product} />{' '}
+            <UpdateProduct productId={product.id} product={product} />
+          </div>
+        ) : (
+          ''
+        )}
         <div>Reviews: </div>
         <ProductReviews
           key={product.id}
           reviews={reviews}
           productId={product.id}
         />
-        {user && user.isAdmin ? (
-          <div>
-            <DeleteProduct product={product} />{' '}
-            <UpdateProduct productId={product.id} />
-          </div>
-        ) : (
-          ''
-        )}
       </div>
     )
   }
