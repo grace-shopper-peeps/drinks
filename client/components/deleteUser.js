@@ -1,13 +1,13 @@
 import React from 'react'
-import deleteUserThunk from '../store/allUsers'
+import {deleteUserThunk} from '../store/allUsers'
 import {connect} from 'react-redux'
 
 export class DeleteUser extends React.Component {
   render() {
-    console.log(this.props)
+    console.log(this.props, 'props on delete user')
     return (
       <button
-        type="submit"
+        type="button"
         onClick={() => {
           this.props.deleteUser(this.props.eachUser.id)
         }}
@@ -18,8 +18,9 @@ export class DeleteUser extends React.Component {
   }
 }
 
-const mapDispatch = dispatch => ({
-  deleteUser: id => dispatch(deleteUserThunk(id))
-})
+const mapDispatch = dispatch => {
+  console.log('are we mapping the dispatch')
+  return {deleteUser: id => dispatch(deleteUserThunk(id))}
+}
 
 export default connect(null, mapDispatch)(DeleteUser)

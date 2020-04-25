@@ -1,6 +1,7 @@
 'use strict'
-
+const faker = require('faker')
 const db = require('../server/db')
+
 const {
   User,
   Product,
@@ -9,6 +10,28 @@ const {
   ProductOrders,
   Review
 } = require('../server/db/models')
+
+const usersList = []
+const dummyProducts = []
+
+for (let i = 0; i < 100; i++) {
+  const userObj = {
+    email: faker.internet.email(),
+    password: faker.internet.password()
+  }
+  usersList.push(userObj)
+}
+
+for (let i = 0; i < 100; i++) {
+  const productObj = {
+    title: faker.commerce.productName(),
+    price: faker.commerce.price(),
+    description: faker.lorem.paragraph(),
+    quantity: faker.random.number(),
+    image: faker.image.nightlife()
+  }
+  dummyProducts.push(productObj)
+}
 
 async function seed() {
   await db.sync({force: true})
@@ -21,7 +44,8 @@ async function seed() {
       email: 'claire@email.com',
       password: 'quarantini',
       isAdmin: true
-    })
+    }),
+    User.bulkCreate(usersList)
   ])
 
   const categories = await Promise.all([Category.create({name: 'Vodka'})])
@@ -78,7 +102,8 @@ async function seed() {
       description: 'Everyone likes it because you get it in a copper mug',
       price: 10,
       quantity: 10
-    })
+    }),
+    Product.bulkCreate(dummyProducts)
   ])
 
   const orders = await Promise.all([
