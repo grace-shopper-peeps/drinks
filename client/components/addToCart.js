@@ -9,12 +9,10 @@ class AddToCart extends React.Component {
   }
   render() {
     // const productId = this.props.id
-    // const product = this.props.product
+    const product = this.props.product
+    // console.log('this is the current product', product)
     return (
-      <button
-        type="submit"
-        onClick={() => this.addProduct({productId: 1, quantity: 3, price: 12})}
-      >
+      <button type="submit" onClick={() => this.addProduct(product)}>
         Add To Cart
       </button>
     )

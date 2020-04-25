@@ -31,7 +31,7 @@ class Products extends React.Component {
                 <p>{product.quantity}</p>
                 <h3>Type: </h3>
                 <p>{product.category ? product.category.name : 'null'}</p>
-                <AddToCart />
+                <AddToCart product={product} />
                 {user && user.isAdmin ? (
                   <DeleteProduct product={product} />
                 ) : (

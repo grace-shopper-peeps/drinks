@@ -63,7 +63,7 @@ router.post('/', async (req, res, next) => {
         }
       ]
     })
-    // console.log('LETS SEE THE MAGIC ', orderExist[0].__proto__)
+    console.log('LETS SEE THE MAGIC ', orderExist[0].__proto__)
     // console.log('testing ORDER', orderExist[0].products)
 
     if (orderExist[0]) {
@@ -72,7 +72,7 @@ router.post('/', async (req, res, next) => {
       console.log('SUUUUPP', orderExist)
       const selectedProduct = await Product.findAll({
         where: {
-          id: req.body.productId // it's req.body.id not productId
+          id: req.body.id // it's req.body.id not productId
         }
       })
       //   await ProductOrders.create(req.body)

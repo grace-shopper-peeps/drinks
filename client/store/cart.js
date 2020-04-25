@@ -38,7 +38,9 @@ export const addProductToCart = product => {
 function cart(state = [], action) {
   switch (action.type) {
     case GET_ORDER_PRODUCTS:
-      return [...state, action.products]
+      return [...state, action.products].filter(item => {
+        return !Array.isArray(item)
+      })
     case ADD_PRODUCT:
       return [...state, action.addedProducts]
     default:
