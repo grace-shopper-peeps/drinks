@@ -32,7 +32,7 @@ router.get('/:guestId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const reviews = await Reviews.create(req.body)
+    const reviews = await Review.create(req.body)
     res.json(reviews)
   } catch (err) {
     next(err)

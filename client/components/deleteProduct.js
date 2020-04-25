@@ -10,7 +10,7 @@ class DeleteProduct extends React.Component {
   render() {
     const productId = this.props.product.id
     return (
-      <button type="submit" onClick={() => this.delete(productId)}>
+      <button type="button" onClick={() => this.delete(productId)}>
         Delete Product
       </button>
     )

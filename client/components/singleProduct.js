@@ -1,10 +1,11 @@
 import React from 'react'
 import {fetchProductThunk} from '../store/product'
 import {connect} from 'react-redux'
+import AddToCart from './addToCart'
 import {ProductReviews} from './singleProductReviews'
 import {getAllReviews} from '../store/reviews'
-import AddToCart from './addToCart'
 import DeleteProduct from './deleteProduct'
+import UpdateProduct from './UpdateProduct'
 
 export class Product extends React.Component {
   componentDidMount() {
@@ -29,7 +30,14 @@ export class Product extends React.Component {
           reviews={reviews}
           productId={product.id}
         />
-        {user && user.isAdmin ? <DeleteProduct product={product} /> : ''}
+        {user && user.isAdmin ? (
+          <div>
+            <DeleteProduct product={product} />{' '}
+            <UpdateProduct productId={product.id} />
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     )
   }

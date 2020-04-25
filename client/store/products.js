@@ -1,6 +1,15 @@
 import axios from 'axios'
 import {DELETE_SINGLE_PRODUCT} from './product'
 const ALL_PRODUCTS = 'ALL_PRODUCTS'
+const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+
+const updateProduct = product => {
+  console.log('product', product)
+  return {
+    type: UPDATE_PRODUCT,
+    product
+  }
+}
 
 const allProducts = products => {
   return {
@@ -38,6 +47,17 @@ export const deleteProductThunk = id => {
   }
 }
 
+export const updateProductThunk = (product, id) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/products/${id}`, product)
+      dispatch(updateProduct(data))
+    } catch (err) {
+      console.log('there was an error deleting the product: ', err)
+    }
+  }
+}
+
 const initialState = []
 
 const allProductsReducer = (state = initialState, action) => {
@@ -50,6 +70,8 @@ const allProductsReducer = (state = initialState, action) => {
           return product
         }
       })
+    case UPDATE_PRODUCT:
+      return action.product
     default:
       return state
   }

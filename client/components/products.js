@@ -4,6 +4,7 @@ import {getAllProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import AddToCart from './addToCart'
 import DeleteProduct from './deleteProduct'
+import UpdateProduct from './UpdateProduct'
 
 class Products extends React.Component {
   componentDidMount() {
@@ -33,7 +34,10 @@ class Products extends React.Component {
                 <p>{product.category ? product.category.name : 'null'}</p>
                 <AddToCart />
                 {user && user.isAdmin ? (
-                  <DeleteProduct product={product} />
+                  <div>
+                    <DeleteProduct product={product} />
+                    <UpdateProduct productId={product.id} />
+                  </div>
                 ) : (
                   ''
                 )}
