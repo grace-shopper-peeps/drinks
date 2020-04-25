@@ -11,13 +11,15 @@ class Products extends React.Component {
     console.log(this.props)
   }
   render() {
+    const products = this.props.products || []
+
     const user = this.props.user
     console.log(this.props, 'this.props of products')
     return (
       <div>
         <div>
-          {this.props.products ? (
-            this.props.products.map(product => {
+          {products ? (
+            products.map(product => {
               return (
                 <div className="drinks" key={product.id}>
                   <Link to={`/products/${product.id}`}>
@@ -39,7 +41,7 @@ class Products extends React.Component {
                       <DeleteProduct product={product} />
                     </div>
                   ) : (
-                    ''
+                    'Product Does Not Exist'
                   )}
                 </div>
               )

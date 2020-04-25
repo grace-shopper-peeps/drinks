@@ -25,17 +25,19 @@ class Cart extends React.Component {
           {cartItems.length > 0
             ? cartItems.map(cartItem => {
                 return (
-                  <p>
-                    <img src={cartItem.image} />
-                    product:
-                    <b>{cartItem.title}</b>
-                    ---- qty:
-                    <b>{cartItem.quantity}</b>
-                    ---- price:
-                    <b>{cartItem.price}</b>
-                    -----total Price:
-                    {/* <b>{cartItem.throughProductOrders.purchasePrice}</b> */}
-                  </p>
+                  <div key={cartItem.id}>
+                    <p>
+                      <img src={cartItem.image} />
+                      product:
+                      <b>{cartItem.title}</b>
+                      ---- qty:
+                      <b>{cartItem.quantity}</b>
+                      ---- price:
+                      <b>{cartItem.price}</b>
+                      -----total Price:
+                      {/* <b>{cartItem.throughProductOrders.purchasePrice}</b> */}
+                    </p>
+                  </div>
                 )
               })
             : "You're cart is empty, start shoppin!"}

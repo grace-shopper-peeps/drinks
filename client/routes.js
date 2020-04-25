@@ -4,8 +4,8 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, Product} from './components'
 import Products from './components/products'
-import Cart from './components/Cart-order'
 import UserList from './components/allUserList'
+import Cart from './components/Cart-order'
 import {me} from './store'
 
 /**
