@@ -86,13 +86,13 @@ router.post('/', async (req, res, next) => {
       console.log('FRRRUUIIIIT')
       const newOrder = await Orders.create({
         userId: req.user.id,
-        status: 'Created',
-        products: []
+        status: 'Created'
       })
+      newOrder.addProduct(req.body)
       console.log('GRAPESSS', newOrder)
       req.body.orderId = newOrder.id
       await ProductOrders.create(req.body)
-      res.json(newOrder)
+      res.json(req.body)
     }
 
     // console.log('REQ BODYDDDDDYYY', req.body)
