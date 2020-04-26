@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getAllOrders} from '../store/orders'
+import {FilterForm} from './filterForm'
 
 class OrderList extends React.Component {
   componentDidMount() {
@@ -12,6 +13,7 @@ class OrderList extends React.Component {
     return (
       <div>
         <h1>Orders:</h1>
+        <FilterForm />
         <ul>
           {this.props.orders ? (
             this.props.orders.map(order => {
