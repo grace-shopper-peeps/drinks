@@ -3,6 +3,17 @@ const {User, Orders} = require('../db/models')
 const isAdmin = require('./middleware/isAdmin')
 module.exports = router
 
+router.get('/', isAdmin, async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      attributes: ['id', 'email']
+    })
+    res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:userId', async (req, res, next) => {
   try {
     const singleUser = await User.findAll({
@@ -21,16 +32,7 @@ router.get('/:userId', async (req, res, next) => {
     next(err)
   }
 })
-router.get('/', isAdmin, async (req, res, next) => {
-  try {
-    const users = await User.findAll({
-      attributes: ['id', 'email']
-    })
-    res.json(users)
-  } catch (err) {
-    next(err)
-  }
-})
+
 router.post('/', async (req, res, next) => {
   try {
     const users = await User.create(req.body)

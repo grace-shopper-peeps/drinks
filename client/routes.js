@@ -9,6 +9,7 @@ import Cart from './components/Cart-order'
 import OrderList from './components/orders'
 import SingleUser from './components/singleUser'
 import {me} from './store'
+import SingleUser from './components/SingleUser'
 
 /**
  * COMPONENT
@@ -33,7 +34,8 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
-            <Route path="/users" component={UserList} />
+            <Route exact path="/users" component={UserList} />
+            <Route exact path="/users/:userId" component={SingleUser} />
             <Route path="/orders" component={OrderList} />
             <Route path="/users/:userId" component={SingleUser} />
           </Switch>

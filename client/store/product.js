@@ -3,6 +3,7 @@ import axios from 'axios'
 const SET_SINGLE_PRODUCT = 'SET_SINGLE_PRODUCT'
 export const DELETE_SINGLE_PRODUCT = 'DELETE_SINGLE_PRODUCT'
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+//const UPGRADE_USER = 'UPGRADE_USER'
 
 export const setSingleProduct = product => {
   return {
