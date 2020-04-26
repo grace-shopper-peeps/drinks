@@ -17,7 +17,7 @@ router.get('/', isAdmin, async (req, res, next) => {
 router.get('/:userId', async (req, res, next) => {
   try {
     const singleUser = await User.findByPk(req.params.userId, {
-      attributes: ['id', 'email'],
+      attributes: ['id', 'email', 'isAdmin'],
       include: [
         {
           model: Orders
@@ -33,7 +33,11 @@ router.get('/:userId', async (req, res, next) => {
 router.put('/:userId', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findByPk(req.params.userId)
-    const updateUser = users.update(req.body)
+    console.log('users', users)
+    const updateUser = await users.update({
+      isAdmin: true
+    })
+    console.log(updateUser)
     res.json(updateUser)
   } catch (err) {
     next(err)
