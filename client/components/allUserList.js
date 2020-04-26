@@ -23,8 +23,6 @@ export class UserList extends React.Component {
                   <h3>User Email:</h3>
                   <div>{eachUser.email}</div>
                 </Link>
-                <h3>User Email:</h3>
-                <div>{eachUser.email}</div>
                 {/* <SingleUser eachUser={eachUser} singleUserId={eachUser.id}/> */}
                 <DeleteUser eachUser={eachUser} />
               </div>
