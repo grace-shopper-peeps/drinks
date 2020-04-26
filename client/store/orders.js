@@ -3,14 +3,29 @@ import axios from 'axios'
 const ALL_ORDERS = 'ALL_ORDERS'
 const UPDATE_ORDERS = 'UPDATE_ORDERS'
 
-const allOrders = orders => {
+export const VisibilityFilters = {
+  SHOW_ALL: 'SHOW_ALL',
+  SHOW_CREATED: 'SHOW_CREATED',
+  SHOW_COMPLETED: 'SHOW_COMPLETED',
+  SHOW_CANCELLED: 'SHOW_CANCELLED',
+  SHOW_PROCESSING: 'SHOW_PROCESSING'
+}
+
+export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+
+export const setVisibilityFilter = filter => ({
+  type: SET_VISIBILITY_FILTER,
+  filter
+})
+
+export const allOrders = orders => {
   return {
     type: ALL_ORDERS,
     orders
   }
 }
 
-const updateOrder = order => {
+export const updateOrder = order => {
   return {
     type: UPDATE_ORDERS,
     order
@@ -41,12 +56,22 @@ export const updateOrderThunk = (order, id) => {
   }
 }
 
-const initialState = []
+const initialState = {orders: [], visibleOrders: []}
 
 const allOrdersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ALL_ORDERS:
-      return action.orders
+      return {...state, orders: action.orders, visibleOrders: action.orders}
+    case SET_VISIBILITY_FILTER:
+      return {
+        ...state,
+        visibleOrders: state.orders.filter(order => {
+          console.log(order.status, 'order status')
+          if (action.filter === order.status) {
+            return order
+          }
+        })
+      }
     // case UPDATE_ORDERS:
     //   return action.order
     default:
