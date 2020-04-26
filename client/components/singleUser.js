@@ -5,18 +5,21 @@ import {getSingleUser} from '../store/singleUser'
 export class SingleUser extends React.Component {
   componentDidMount() {
     this.props.getUser(this.props.match.params.userId)
-    console.log('this.props', this.props.singleUser)
   }
 
   render() {
-    return this.props.singleUser ? (
+    if (this.props.singleUser[0]) {
+      console.log('this.props in single user', this.props.singleUser[0].id)
+    }
+
+    return this.props.singleUser[0] ? (
       <div>
         <h2>User:</h2>
-        <h3>{this.props.singleUser.id}</h3>
-        <div>{this.props.singleUser.email}</div>
+        <h3>{this.props.singleUser[0].id}</h3>
+        <div>{this.props.singleUser[0].email}</div>
         <h2>Admin:</h2>
         {/* get isAdmin to render */}
-        <p>{this.props.singleUser.isAdmin}</p>
+        <p>{this.props.singleUser[0].isAdmin}</p>
         <button type="button">Upgrade user To Admin</button>
       </div>
     ) : (
@@ -24,7 +27,6 @@ export class SingleUser extends React.Component {
     )
   }
 }
-
 const mapState = state => {
   return {
     wantedUser: state.users,
