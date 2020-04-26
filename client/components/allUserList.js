@@ -22,7 +22,6 @@ export class UserList extends React.Component {
                 <Link to={`/users/${eachUser.id}`}>
                   <h3>User Email:</h3>
                   <div>{eachUser.email}</div>
-                  {/* <SingleUser eachUser={eachUser} singleUserId={eachUser.id}/> */}
                 </Link>
                 <DeleteUser eachUser={eachUser} />
               </div>

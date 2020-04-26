@@ -26,6 +26,16 @@ router.get('/:userId', isAdmin, async (req, res, next) => {
   }
 })
 
+router.put('/:userId', isAdmin, async (req, res, next) => {
+  try {
+    const users = await User.findByPk(req.params.userId)
+    const updateUser = users.update(req.body)
+    res.json(updateUser)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const users = await User.create(req.body)
