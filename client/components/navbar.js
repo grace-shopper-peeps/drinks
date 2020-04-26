@@ -25,7 +25,7 @@ const Navbar = (props, {handleClick, isLoggedIn}) => (
       )}
       <Link to="/products">All Products</Link>
       <Link to="/cart">Cart</Link>
-      {props.user.isAdmin === true || !props.user ? (
+      {props.user.isAdmin === true || isLoggedIn ? (
         <Link to="/users">All User</Link>
       ) : null}
     </nav>

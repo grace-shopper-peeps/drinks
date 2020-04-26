@@ -17,7 +17,7 @@ router.get('/', isAdmin, async (req, res, next) => {
   }
 })
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findByPk(req.params.userId)
     res.json(users)
