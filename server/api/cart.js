@@ -68,14 +68,13 @@ router.post('/', async (req, res, next) => {
     // console.log('testing ORDER', orderExist[0].products)
 
     if (orderExist[0]) {
-      //doesn't like this formatting
-      console.log('BERRRRIES')
-      console.log('SUUUUPP', orderExist)
       const selectedProduct = await Product.findAll({
         where: {
-          id: req.body.id // it's req.body.id not productId
+          id: req.body.id
         }
       })
+      //   if (orderExist[0].products)
+      // just adjust the quantity is product already in cart
       //   await ProductOrders.create(req.body)
       const updatedOrder = orderExist[0].addProduct(selectedProduct[0])
       //   console.log('ORANGGGGGESSS', orderExist[0].products)
@@ -92,13 +91,9 @@ router.post('/', async (req, res, next) => {
       newOrder.addProduct(req.body)
       console.log('GRAPESSS', newOrder)
       req.body.orderId = newOrder.id
-      await ProductOrders.create(req.body)
+      await ProductOrders.create(req.body) // the req.body now needs to grab the quantity off of the state and send it back here
       res.json(req.body)
     }
-
-    // console.log('REQ BODYDDDDDYYY', req.body)
-    // const newProductOrder = await ProductOrders.create(req.body) //createdOrder.id we need to find some way to merge the req.body and createdOrder.id
-    // console.log('New Product', newProductOrder)
   } catch (err) {
     //migrate session cart to user cart for logged in user , store on session productId and qty
 

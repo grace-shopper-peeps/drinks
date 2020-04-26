@@ -12,9 +12,12 @@ class AddToCart extends React.Component {
     const product = this.props.product
     // console.log('this is the current product', product)
     return (
-      <button type="submit" onClick={() => this.addProduct(product)}>
-        Add To Cart
-      </button>
+      <div>
+        <input type="number" />
+        <button type="submit" onClick={() => this.addProduct(product)}>
+          Add To Cart
+        </button>
+      </div>
     )
   }
 }

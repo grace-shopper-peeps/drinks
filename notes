@@ -1,1 +1,6 @@
 -when I log in as another user the cart is still there until I refresh? Have someone else login or signup to make sure this is just on your computer not app wide 
+-Need to consolidate , so when I add to cart I only add th eproduct one time to the product-order table and just have the qty refelct how many products I want instead of clickin the add to cart button for the number of items I want = the number of clicks
+-the above will be easier when I tie in the quantity and bring it to the back when I create the product-order instance as mentioned below
+-added input field on cart,products and single product component need to grab off state and take to back when I create the instance on productOrder model
+-want to have cart input auto-populate with the quantity specified when added to cart(probably going to go to ordertable and 'get')the number from there as well as 'on change' when qty is inc or decr put/update order-products qty on that productId
+-eventually want to have purchase price constantly reflect how many items in cart time price of item this may be easy once I add quamtity because 'beforecreate' set now just need the same functionality on a 'beforeVlaidate" or whatever happens when you update an instance.

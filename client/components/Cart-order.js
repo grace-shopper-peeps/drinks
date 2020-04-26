@@ -41,6 +41,10 @@ class Cart extends React.Component {
                     >
                       Remove Item
                     </button>
+                    <div>
+                      qty:
+                      <input type="number" />
+                    </div>
                   </p>
                 )
               })
