@@ -8,9 +8,11 @@ import singleProductReducer from './product'
 import allProductsReducer from './products'
 import allReviewsReducer from './reviews'
 import allUsersReducer from './allUsers'
+import allOrdersReducer from './orders'
 
 const reducer = combineReducers({
   user,
+  orders: allOrdersReducer,
   product: singleProductReducer,
   products: allProductsReducer,
   reviews: allReviewsReducer,
