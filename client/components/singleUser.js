@@ -5,15 +5,19 @@ import {getSingleUser} from '../store/singleUser'
 export class SingleUser extends React.Component {
   componentDidMount() {
     this.props.getUser(this.props.match.params.userId)
-    console.log('this.props', this.props)
+    console.log('this.props', this.props.singleUser)
   }
 
   render() {
-    const eachUser = this.props.eachUser
     return this.props.singleUser ? (
       <div>
         <h2>User:</h2>
+        <h3>{this.props.singleUser.id}</h3>
         <div>{this.props.singleUser.email}</div>
+        <h2>Admin:</h2>
+        {/* get isAdmin to render */}
+        <p>{this.props.singleUser.isAdmin}</p>
+        <button type="button">Upgrade user To Admin</button>
       </div>
     ) : (
       <div>loading</div>

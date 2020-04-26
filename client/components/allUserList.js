@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {fetchAllUsers} from '../store/allUsers'
 import DeleteUser from './deleteUser'
 import {Link} from 'react-router-dom'
-import SingleUser from './SingleUser'
+import SingleUser from './singleUser'
 export class UserList extends React.Component {
   componentDidMount() {
     this.props.allUsers()
@@ -20,6 +20,8 @@ export class UserList extends React.Component {
               <div key={eachUser.id}>
                 <Link to={`/users/${eachUser.id}`}>
                   <h3>Account Id: {eachUser.id}</h3>
+                  <h3>User Email:</h3>
+                  <div>{eachUser.email}</div>
                 </Link>
                 <div>{eachUser.email}</div>
                 <h3>User Email:</h3>

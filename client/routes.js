@@ -9,8 +9,6 @@ import Cart from './components/Cart-order'
 import OrderList from './components/orders'
 import SingleUser from './components/singleUser'
 import {me} from './store'
-import SingleUser from './components/SingleUser'
-
 /**
  * COMPONENT
  */
