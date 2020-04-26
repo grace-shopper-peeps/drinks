@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchOrderProducts} from '../store/cart'
+import {fetchOrderProducts, deleteCartItem} from '../store/cart'
 
 class Cart extends React.Component {
   componentDidMount() {
@@ -35,6 +35,12 @@ class Cart extends React.Component {
                     <b>{cartItem.price}</b>
                     -----total Price:
                     {/* <b>{cartItem.throughProductOrders.purchasePrice}</b> */}
+                    <button
+                      type="button"
+                      onClick={() => this.removeItem(cartItem)}
+                    >
+                      Remove Item
+                    </button>
                   </p>
                 )
               })
@@ -60,7 +66,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getCart: () => dispatch(fetchOrderProducts())
+  getCart: () => dispatch(fetchOrderProducts()),
+  removeItem: item => dispatch(deleteCartItem(item))
 })
 
 export default connect(mapState, mapDispatch)(Cart)

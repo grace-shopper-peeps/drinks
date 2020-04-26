@@ -2,6 +2,7 @@ const router = require('express').Router()
 const ProductOrders = require('../db/models/product-orders')
 const Product = require('../db/models/product')
 const Orders = require('../db/models/orders')
+const User = require('../db/models/user')
 
 router.get('/', async (req, res, next) => {
   if (req.user) {
@@ -103,6 +104,19 @@ router.post('/', async (req, res, next) => {
 
     // if they have drinks in their guest cart and some user cart , figure out how we merge them without being duplicates
 
+    next(err)
+  }
+})
+
+router.delete('/', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const user = await User.findByPk(req.user.id)
+      const orders = await user.getOrders({where: {status: 'Created'}})
+      await orders[0].removeProduct(req.body.id)
+      res.sendStatus(204)
+    }
+  } catch (err) {
     next(err)
   }
 })
