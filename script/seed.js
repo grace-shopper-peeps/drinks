@@ -107,7 +107,11 @@ async function seed() {
   ])
 
   const orders = await Promise.all([
-    Orders.create({price: 22, quantity: 2, userId: 3}),
+    Orders.create({price: 20, quantity: 2, userId: 1}),
+    Orders.create({price: 30, quantity: 5, userId: 2}),
+    Orders.create({price: 22, quantity: 7, userId: 3}),
+    Orders.create({price: 50, quantity: 4, userId: 2}),
+    Orders.create({price: 30, quantity: 2, userId: 3}),
     Orders.create({price: 50, quantity: 3, userId: 2})
     // how does our through table know how many products per order we get?
     //order can have qty total but it also needs to get the productId and orderId from the thorugh table to display in  the order
