@@ -12,14 +12,14 @@ export class SingleUser extends React.Component {
       console.log('this.props in single user', this.props.singleUser[0].id)
     }
 
-    return this.props.singleUser[0] ? (
+    return this.props.singleUser ? (
       <div>
         <h2>User:</h2>
-        <h3>{this.props.singleUser[0].id}</h3>
-        <div>{this.props.singleUser[0].email}</div>
+        <h3>{this.props.singleUser.id}</h3>
+        <div>{this.props.singleUser.email}</div>
         <h2>Admin:</h2>
         {/* get isAdmin to render */}
-        <p>{this.props.singleUser[0].isAdmin}</p>
+        <p>{this.props.singleUser.isAdmin}</p>
         <button type="button">Upgrade user To Admin</button>
       </div>
     ) : (

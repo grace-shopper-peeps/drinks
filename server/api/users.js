@@ -16,11 +16,8 @@ router.get('/', isAdmin, async (req, res, next) => {
 
 router.get('/:userId', async (req, res, next) => {
   try {
-    const singleUser = await User.findAll({
+    const singleUser = await User.findByPk(req.params.userId, {
       attributes: ['id', 'email'],
-      where: {
-        id: req.params.userId
-      },
       include: [
         {
           model: Orders
