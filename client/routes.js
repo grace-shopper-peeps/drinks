@@ -7,6 +7,7 @@ import Products from './components/products'
 import UserList from './components/allUserList'
 import Cart from './components/Cart-order'
 import OrderList from './components/orders'
+import SingleUser from './components/singleUser'
 import {me} from './store'
 
 /**
@@ -34,6 +35,7 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route path="/users" component={UserList} />
             <Route path="/orders" component={OrderList} />
+            <Route path="/users/:userId" component={SingleUser} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

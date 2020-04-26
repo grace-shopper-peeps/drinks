@@ -1,11 +1,17 @@
 import axios from 'axios'
 
-const GET_ORDER_PRODUCTS = 'GET_ORDER_PRODUCTS'
 const ADD_PRODUCT = 'ADD_PRODUCT'
+const GET_ORDER_PRODUCTS = 'GET_ORDER_PRODUCTS'
+const DELETE_ITEM = 'DELETE_ITEM'
 
 export const getOrderProducts = products => ({
   type: GET_ORDER_PRODUCTS,
   products
+})
+
+export const deleteItem = product => ({
+  type: DELETE_ITEM,
+  productId: product.id
 })
 
 export const addProducts = addedProducts => ({
@@ -35,6 +41,17 @@ export const addProductToCart = product => {
   }
 }
 
+export const deleteCartItem = product => {
+  return async dispatch => {
+    try {
+      await axios.delete('/api/cart', product)
+      dispatch(deleteItem(product))
+    } catch (err) {
+      console.log('trouble removing item from cart')
+    }
+  }
+}
+
 function cart(state = [], action) {
   switch (action.type) {
     case GET_ORDER_PRODUCTS:
@@ -43,6 +60,8 @@ function cart(state = [], action) {
       })
     case ADD_PRODUCT:
       return [...state, action.addedProducts]
+    case DELETE_ITEM:
+      return state.filter(product => product.id !== action.productId)
     default:
       return state
   }

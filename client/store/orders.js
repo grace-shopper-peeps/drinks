@@ -36,7 +36,7 @@ export const updateOrderThunk = (order, id) => {
       const {data} = await axios.put(`/api/orders/${id}`, order)
       dispatch(updateOrder(data))
     } catch (err) {
-      console.log('there was an error deleting the order: ', err)
+      console.log('there was an error updating the order: ', err)
     }
   }
 }

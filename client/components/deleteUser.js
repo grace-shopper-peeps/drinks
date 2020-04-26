@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 
 export class DeleteUser extends React.Component {
   render() {
-    console.log(this.props, 'props on delete user')
     return (
       <button
         type="button"
@@ -19,7 +18,6 @@ export class DeleteUser extends React.Component {
 }
 
 const mapDispatch = dispatch => {
-  console.log('are we mapping the dispatch')
   return {deleteUser: id => dispatch(deleteUserThunk(id))}
 }
 
