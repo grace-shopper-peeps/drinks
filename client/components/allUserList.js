@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {fetchAllUsers} from '../store/allUsers'
 import DeleteUser from './deleteUser'
 import {Link} from 'react-router-dom'
-import SingleUser from './SingleUser'
+import SingleUser from './singleUser'
 export class UserList extends React.Component {
   componentDidMount() {
     this.props.allUsers()

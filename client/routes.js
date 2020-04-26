@@ -8,7 +8,7 @@ import UserList from './components/allUserList'
 import Cart from './components/Cart-order'
 import OrderList from './components/orders'
 import {me} from './store'
-import SingleUser from './components/SingleUser'
+import SingleUser from './components/singleUser'
 
 /**
  * COMPONENT
