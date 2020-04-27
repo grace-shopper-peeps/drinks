@@ -1,11 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-  fetchOrderProducts,
-  deleteCartItem,
-  addProductToCart
-} from '../store/cart'
+import {fetchOrderProducts} from '../store/cart'
 import Checkout from './Checkout'
+import CartProduct from './CartProduct'
 
 class Cart extends React.Component {
   componentDidMount() {
@@ -32,34 +29,7 @@ class Cart extends React.Component {
         <h1>Cart Summary:</h1>
         <div>
           {cartItems.length > 0
-            ? cartItems.map(cartItem => {
-                return (
-                  <p>
-                    <img src={cartItem.image} />
-                    product:
-                    <b>{cartItem.title}</b>
-                    ---- qty:
-                    <b>{cartItem.throughProductOrders.quantity}</b>
-                    ---- price:
-                    <b>{cartItem.price}</b>
-                    -----total Price:
-                    {/* <b>{cartItem.throughProductOrders.purchasePrice}</b> */}
-                    <button
-                      type="button"
-                      onClick={() => this.removeItem(cartItem)}
-                    >
-                      Remove Item
-                    </button>
-                    <div>
-                      qty:
-                      <input
-                        type="number"
-                        // onChange={() => this.updateItem(cartItem)}
-                      />
-                    </div>
-                  </p>
-                )
-              })
+            ? cartItems.map(cartItem => <CartProduct cartItem={cartItem} />)
             : "You're cart is empty, start shoppin!"}
         </div>
         <b>Total Items: {cartItems.length}</b>
@@ -83,8 +53,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getCart: () => dispatch(fetchOrderProducts()),
-  removeItem: item => dispatch(deleteCartItem(item))
+  getCart: () => dispatch(fetchOrderProducts())
   // updateItem: (product) => dispatch(addProductToCart(product)),
 })
 
