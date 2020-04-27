@@ -6,7 +6,8 @@ const User = require('../db/models/user')
 
 router.get('/', async (req, res, next) => {
   if (req.user) {
-    const newOrder = await Orders.findAll({
+    const newOrder = await Orders.findOrCreate({
+      //may want to do findOrCreate
       where: {
         userId: req.user.id,
         status: 'Created'
@@ -19,7 +20,7 @@ router.get('/', async (req, res, next) => {
       ]
     })
 
-    console.log('NEWW ORDDEEERRR', newOrder[0].products)
+    console.log('NEWW ORDDEEERRR', newOrder[0].products) //newOrders wont have products
     res.json(newOrder[0].products)
   } else {
     res.json(['no cart found'])
@@ -100,6 +101,15 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+// router.put('/',async(req,res,next)=>{
+//   try{
+
+//   }
+//   catch(err){
+//     next(err)
+//   }
+// })
 
 router.delete('/', async (req, res, next) => {
   try {

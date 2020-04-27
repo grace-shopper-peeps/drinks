@@ -1,6 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchOrderProducts, deleteCartItem} from '../store/cart'
+import {
+  fetchOrderProducts,
+  deleteCartItem,
+  addProductToCart
+} from '../store/cart'
+import Checkout from './Checkout'
 
 class Cart extends React.Component {
   componentDidMount() {
@@ -10,6 +15,10 @@ class Cart extends React.Component {
 
   removeItem(item) {
     this.props.removeItem(item)
+  }
+
+  updateCart(product) {
+    this.props.updateItem(product)
   }
 
   render() {
@@ -30,7 +39,7 @@ class Cart extends React.Component {
                     product:
                     <b>{cartItem.title}</b>
                     ---- qty:
-                    <b>{cartItem.quantity}</b>
+                    <b>{cartItem.throughProductOrders.quantity}</b>
                     ---- price:
                     <b>{cartItem.price}</b>
                     -----total Price:
@@ -43,7 +52,10 @@ class Cart extends React.Component {
                     </button>
                     <div>
                       qty:
-                      <input type="number" />
+                      <input
+                        type="number"
+                        // onChange={() => this.updateItem(cartItem)}
+                      />
                     </div>
                   </p>
                 )
@@ -60,6 +72,7 @@ class Cart extends React.Component {
         <p>
           <b>Total:$389.99</b>
         </p>
+        <Checkout />
       </div>
     )
   }
@@ -72,6 +85,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   getCart: () => dispatch(fetchOrderProducts()),
   removeItem: item => dispatch(deleteCartItem(item))
+  // updateItem: (product) => dispatch(addProductToCart(product)),
 })
 
 export default connect(mapState, mapDispatch)(Cart)
