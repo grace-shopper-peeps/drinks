@@ -4,14 +4,13 @@
 }
 @font-face {
   font-family: Amb;
-  src: url('./AMBROSIA_DEMO.ttf');
+  src: url('./spire.ttf');
 }
 
 body {
   font-family: Amb;
+  font-size: larger;
   display: flex;
-  background-color: antiquewhite;
-  background-image: url(background.jpg);
 }
 
 a {
@@ -34,7 +33,7 @@ nav {
   border-style: solid;
   padding: 15px;
   border-radius: 50px;
-  font-family: Aloja;
+  font-family: Amb;
   font-weight: 900;
   color: white;
   border-width: 5px;
@@ -42,7 +41,7 @@ nav {
 }
 
 #top {
-  font-family: Aloja;
+  font-family: Amb;
   font-size: 90px;
 }
 

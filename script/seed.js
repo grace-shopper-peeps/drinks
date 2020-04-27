@@ -22,7 +22,7 @@ for (let i = 0; i < 100; i++) {
   usersList.push(userObj)
 }
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 15; i++) {
   const productObj = {
     title: faker.commerce.productName(),
     price: faker.commerce.price(),
@@ -59,14 +59,8 @@ async function seed() {
       categoryId: 1
     }),
     Product.create({
-      title: 'Moscow Mule',
-      description: 'Everyone likes it because you get it in a copper mug',
-      price: 10,
-      quantity: 10
-    }),
-    Product.create({
-      title: 'Martini',
-      description: 'Glorified way to drink liquor straight',
+      title: 'Old Fashioned',
+      description: 'Classic whiskey cocktail',
       price: 12,
       quantity: 5,
       categoryId: 1
@@ -75,34 +69,23 @@ async function seed() {
       title: 'Moscow Mule',
       description: 'Everyone likes it because you get it in a copper mug',
       price: 10,
-      quantity: 10
+      quantity: 2
     }),
     Product.create({
-      title: 'Martini',
-      description: 'Glorified way to drink liquor straight',
+      title: 'Aperol Spritz',
+      description: 'Bubbles',
       price: 12,
       quantity: 5,
       categoryId: 1
     }),
     Product.create({
-      title: 'Moscow Mule',
-      description: 'Everyone likes it because you get it in a copper mug',
+      title: 'Margarita',
+      description: 'Tequilaaaa',
       price: 10,
-      quantity: 10
-    }),
-    Product.create({
-      title: 'Martini',
-      description: 'Glorified way to drink liquor straight',
-      price: 12,
-      quantity: 5,
+      quantity: 10,
       categoryId: 1
     }),
-    Product.create({
-      title: 'Moscow Mule',
-      description: 'Everyone likes it because you get it in a copper mug',
-      price: 10,
-      quantity: 10
-    }),
+
     Product.bulkCreate(dummyProducts)
   ])
 
