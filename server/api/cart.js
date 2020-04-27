@@ -40,9 +40,6 @@ router.post('/', async (req, res, next) => {
         }
       ]
     })
-    // console.log('LETS SEE THE MAGIC ', orderExist[0].__proto__)
-    // console.log('testing ORDER', orderExist[0].products)
-
     if (orderExist[0]) {
       console.log('LEMMONNNNS')
       const productOrderExist = await ProductOrders.findAll({
@@ -52,15 +49,23 @@ router.post('/', async (req, res, next) => {
         }
       })
       if (productOrderExist[0]) {
-        conosle.log('PEEACHHHESSS')
-        const productUpdate = await ProductOrders.findByPk(
-          productOrderExist[0].id
+        console.log('BERRRIES')
+        await ProductOrders.update(
+          {quantity: (productOrderExist[0].quantity += req.body.quantity)},
+          {
+            where: {
+              productId: productOrderExist[0].productId,
+              orderId: productOrderExist[0].orderId
+            }
+          }
         )
-        res.json(
-          await productUpdate.update({
-            quantity: req.body.quantity
-          })
-        )
+        const updatedProductOrder = await ProductOrders.findAll({
+          where: {
+            productId: productOrderExist[0].productId,
+            orderId: productOrderExist[0].orderId
+          }
+        })
+        res.json(updatedProductOrder[0])
       } else {
         console.log('COCONNNUUTT')
         req.body.orderId = orderExist[0].id
@@ -78,8 +83,6 @@ router.post('/', async (req, res, next) => {
         userId: req.user.id,
         status: 'Created'
       })
-      // Product(req.body.id)
-      // console.log('GRAPESSS', newOrder)
       req.body.orderId = newOrder.id
       const firstProduct = await ProductOrders.create({
         orderId: newOrder.id,
@@ -87,7 +90,6 @@ router.post('/', async (req, res, next) => {
         quantity: req.body.quantity
       })
       console.log('APPPLLLEEE', firstProduct)
-      // the req.body now needs to grab the quantity off of the state and send it back here
       res.json(firstProduct)
     }
   } catch (err) {
