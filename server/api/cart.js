@@ -45,22 +45,26 @@ router.post('/', async (req, res, next) => {
 
     if (orderExist[0]) {
       console.log('LEMMONNNNS')
-      const productOrderExist = await ProductOrders.findAll({
+      const productOrderExist = await ProductOrders.findOne({
         where: {
           orderId: orderExist[0].id,
           productId: req.body.id
         }
       })
-      if (productOrderExist[0]) {
-        conosle.log('PEEACHHHESSS')
-        const productUpdate = await ProductOrders.findByPk(
-          productOrderExist[0].id
-        )
-        res.json(
-          await productUpdate.update({
-            quantity: req.body.quantity
-          })
-        )
+      if (productOrderExist) {
+        console.log('PEEACHHHESSS')
+        // const productUpdate = await ProductOrders.findByPk(
+        //   productOrderExist[0].id
+        // )
+        console.log('productOrderExist', productOrderExist)
+        productOrderExist.quantity = req.body.quantity
+        const updatedProductOrder = await productOrderExist.save()
+        res.json(updatedProductOrder)
+        // res.json(
+        //   await productUpdate.update({
+        //     quantity: req.body.quantity
+        //   })
+        // )
       } else {
         console.log('COCONNNUUTT')
         req.body.orderId = orderExist[0].id
