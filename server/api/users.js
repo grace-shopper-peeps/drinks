@@ -67,4 +67,18 @@ router.delete('/:userId', isAdmin, async (req, res, next) => {
   }
 })
 
+router.put('/myProfile/:userId', async (req, res, next) => {
+  try {
+    const users = await User.findByPk(req.user.id)
+    console.log('users', users)
+    const updateUser = await users.update({
+      email: req.body.email
+    })
+    console.log('updated user', updateUser)
+    res.json(updateUser)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //routes

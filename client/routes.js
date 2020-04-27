@@ -8,6 +8,7 @@ import UserList from './components/allUserList'
 import Cart from './components/Cart-order'
 import OrderList from './components/orders'
 import SingleUser from './components/singleUser'
+import MyProfile from './components/MyProfile'
 import {me} from './store'
 /**
  * COMPONENT
@@ -35,7 +36,8 @@ class Routes extends Component {
             <Route exact path="/users" component={UserList} />
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route path="/orders" component={OrderList} />
-            <Route path="/users/:userId" component={SingleUser} />
+            <Route exact path="/users/:userId" component={SingleUser} />
+            <Route path="/users/myProfile/:userId" component={MyProfile} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

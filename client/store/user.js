@@ -6,7 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-
+const UPDATE_EMAIL = 'UPDATE_EMAIL'
 /**
  * INITIAL STATE
  */
@@ -17,6 +17,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const updateEmail = email => ({type: UPDATE_EMAIL, email})
 
 /**
  * THUNK CREATORS
@@ -55,6 +56,16 @@ export const logout = () => async dispatch => {
     console.error(err)
   }
 }
+export const updateUserThunk = user => async dispatch => {
+  console.log('user thunk', user)
+  try {
+    const {data} = await axios.put(`/api/users/myProfile/${user.id}`, user)
+    console.log('in try user thunk', user)
+    dispatch(updateEmail(data.email))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 /**
  * REDUCER
@@ -65,6 +76,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case UPDATE_EMAIL:
+      return {...state, email: action.email}
     default:
       return state
   }
