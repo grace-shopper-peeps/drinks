@@ -24,34 +24,10 @@ router.get('/', async (req, res, next) => {
   } else {
     res.json(['no cart found'])
   }
-
-  //   try {
-  //     if (req.user) {
-  //       req.user.id = 3
-  //   const userOrders = await req.user.getOrders()
-  //   const dummyOrder = await ProductOrders.findAll({
-  //     where: {
-  //       orderId: 1,
-  //     },
-  //     // include: {model: Product},
-  //   })
-  //   console.log('USERRRR', req.user)
-  //   const userOrders = await req.user.getOrders()
-  //   console.log('CLAIRESS ORDER', userOrders)
-
-  //       res.json(['honey', 'bee', 'margs'])
-  //     }
-  //   } catch (err) {
-  //     next(err)
-  //   }
 })
 
 router.post('/', async (req, res, next) => {
-  //check post and put routes when we get from lunch
-  // await ProductOrders.findAll({})
   try {
-    // console.log(req.user)
-    // console.log('session', req.session)
     const orderExist = await Orders.findAll({
       where: {
         status: 'Created',
@@ -64,35 +40,55 @@ router.post('/', async (req, res, next) => {
         }
       ]
     })
-    console.log('LETS SEE THE MAGIC ', orderExist[0].__proto__)
+    // console.log('LETS SEE THE MAGIC ', orderExist[0].__proto__)
     // console.log('testing ORDER', orderExist[0].products)
 
     if (orderExist[0]) {
-      const selectedProduct = await Product.findAll({
+      console.log('LEMMONNNNS')
+      const productOrderExist = await ProductOrders.findAll({
         where: {
-          id: req.body.id
+          orderId: orderExist[0].id,
+          productId: req.body.id
         }
       })
-      //   if (orderExist[0].products)
-      // just adjust the quantity is product already in cart
-      //   await ProductOrders.create(req.body)
-      const updatedOrder = orderExist[0].addProduct(selectedProduct[0])
-      //   console.log('ORANGGGGGESSS', orderExist[0].products)
-      res.json(selectedProduct[0])
-
-      console.log('BANANANAS', orderExist)
-      console.log('STRRRAWWBBEYEYYY', req.body)
+      if (productOrderExist[0]) {
+        conosle.log('PEEACHHHESSS')
+        const productUpdate = await ProductOrders.findByPk(
+          productOrderExist[0].id
+        )
+        res.json(
+          await productUpdate.update({
+            quantity: req.body.quantity
+          })
+        )
+      } else {
+        console.log('COCONNNUUTT')
+        req.body.orderId = orderExist[0].id
+        res.json(
+          await ProductOrders.create({
+            orderId: orderExist[0].id,
+            productId: req.body.id,
+            quantity: req.body.quantity
+          })
+        )
+      }
     } else {
       console.log('FRRRUUIIIIT')
       const newOrder = await Orders.create({
         userId: req.user.id,
         status: 'Created'
       })
-      newOrder.addProduct(req.body)
-      console.log('GRAPESSS', newOrder)
+      // Product(req.body.id)
+      // console.log('GRAPESSS', newOrder)
       req.body.orderId = newOrder.id
-      await ProductOrders.create(req.body) // the req.body now needs to grab the quantity off of the state and send it back here
-      res.json(req.body)
+      const firstProduct = await ProductOrders.create({
+        orderId: newOrder.id,
+        productId: req.body.id,
+        quantity: req.body.quantity
+      })
+      console.log('APPPLLLEEE', firstProduct)
+      // the req.body now needs to grab the quantity off of the state and send it back here
+      res.json(firstProduct)
     }
   } catch (err) {
     //migrate session cart to user cart for logged in user , store on session productId and qty
