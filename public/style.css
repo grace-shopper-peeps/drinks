@@ -1,5 +1,17 @@
+@font-face {
+  font-family: Aloja;
+  src: url('./Aloja-Light.woff');
+}
+@font-face {
+  font-family: Amb;
+  src: url('./AMBROSIA_DEMO.ttf');
+}
+
 body {
-  font-family: sans-serif;
+  font-family: Amb;
+  display: flex;
+  background-color: antiquewhite;
+  background-image: url(background.jpg);
 }
 
 a {
@@ -10,16 +22,39 @@ label {
   display: block;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
 form div {
   margin: 1em;
   display: inline-block;
 }
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1em;
+  border-style: solid;
+  padding: 15px;
+  border-radius: 50px;
+  font-family: Aloja;
+  font-weight: 900;
+  color: white;
+  border-width: 5px;
+  font-size: 1.5em;
+}
+
+#top {
+  font-family: Aloja;
+  font-size: 90px;
+}
+
 .drinks {
   border: solid purple;
   background-color: skyblue;
+}
+
+#nav-bar {
+  display: flex;
+}
+
+.link {
+  margin: 20px;
 }

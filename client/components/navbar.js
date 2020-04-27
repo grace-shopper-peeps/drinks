@@ -1,4 +1,8 @@
 import React from 'react'
+import Nav from 'react-bootstrap/Nav'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -6,31 +10,49 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => {
   return (
-    <div>
-      <h1>Quarantini</h1>
-      <nav>
-        {isLoggedIn ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </div>
-        ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        )}
-        <Link to="/products">All Products</Link>
-        <Link to="/cart">Cart</Link>
-        <Link to="/orders">All Orders</Link>
-        <Link to="/users">All User</Link>
-      </nav>
-      <hr />
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <h1 id="top">Quarantini</h1>
+        </Col>
+        <Col>
+          <nav id="nav-bar">
+            {isLoggedIn ? (
+              <div>
+                {/* The navbar will show these links after you log in */}
+                <Link className="link" to="/home">
+                  Home
+                </Link>
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              </div>
+            ) : (
+              <div>
+                {/* The navbar will show these links before you log in */}
+                <Link className="link" to="/login">
+                  Login
+                </Link>
+                <Link to="/signup">Sign Up</Link>
+              </div>
+            )}
+            <Link className="link" to="/products">
+              All Products
+            </Link>
+            <Link className="link" to="/cart">
+              Cart
+            </Link>
+            <Link className="link" to="/orders">
+              All Orders
+            </Link>
+            <Link className="link" to="/users">
+              All User
+            </Link>
+          </nav>
+        </Col>
+        <hr />
+      </Row>
+    </Container>
   )
 }
 
