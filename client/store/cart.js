@@ -60,6 +60,9 @@ function cart(state = [], action) {
       })
     case ADD_PRODUCT:
       return [...state, action.addedProducts]
+    // .filter(product => {
+    //   return product.id !== action.product.id
+    // })
     case DELETE_ITEM:
       return state.filter(product => product.id !== action.productId)
     default:
