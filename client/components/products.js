@@ -17,8 +17,8 @@ class Products extends React.Component {
     console.log(this.props, 'this.props of products')
     return (
       <div>
-        <div>
-          <AddProduct />
+        <AddProduct />
+        <div className="container">
           {products.map(product => {
             return (
               <div className="drinks" key={product.id}>

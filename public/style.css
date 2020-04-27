@@ -45,9 +45,14 @@ nav {
   font-size: 90px;
 }
 
+.container {
+  display: grid;
+}
+
 .drinks {
-  border: solid purple;
-  background-color: skyblue;
+  border: slategray;
+  border-style: groove;
+  background-color: lightgray;
 }
 
 #nav-bar {

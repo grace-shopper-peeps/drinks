@@ -12,7 +12,6 @@ const {
 } = require('../server/db/models')
 
 const usersList = []
-const dummyProducts = []
 
 for (let i = 0; i < 100; i++) {
   const userObj = {
@@ -22,20 +21,18 @@ for (let i = 0; i < 100; i++) {
   usersList.push(userObj)
 }
 
-for (let i = 0; i < 15; i++) {
-  const productObj = {
-    title: faker.commerce.productName(),
-    price: faker.commerce.price(),
-    description: faker.lorem.paragraph(),
-    quantity: faker.random.number(),
-    image: faker.image.nightlife()
-  }
-  dummyProducts.push(productObj)
-}
-
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+
+  const categories = await Promise.all([
+    Category.create({name: 'Vodka'}),
+    Category.create({name: 'Gin'}),
+    Category.create({name: 'Rum'}),
+    Category.create({name: 'Tequila'}),
+    Category.create({name: 'Bourbon'}),
+    Category.create({name: 'Misc'})
+  ])
 
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
@@ -48,11 +45,9 @@ async function seed() {
     User.bulkCreate(usersList)
   ])
 
-  const categories = await Promise.all([Category.create({name: 'Vodka'})])
-
   const products = await Promise.all([
     Product.create({
-      title: 'Martini',
+      title: 'Gin Martini',
       description: 'Glorified way to drink liquor straight',
       price: 12,
       quantity: 5,
@@ -63,30 +58,29 @@ async function seed() {
       description: 'Classic whiskey cocktail',
       price: 12,
       quantity: 5,
-      categoryId: 1
+      categoryId: 5
     }),
     Product.create({
       title: 'Moscow Mule',
       description: 'Everyone likes it because you get it in a copper mug',
       price: 10,
-      quantity: 2
+      quantity: 1,
+      categoryId: 1
     }),
     Product.create({
       title: 'Aperol Spritz',
       description: 'Bubbles',
       price: 12,
       quantity: 5,
-      categoryId: 1
+      categoryId: 6
     }),
     Product.create({
       title: 'Margarita',
       description: 'Tequilaaaa',
       price: 10,
       quantity: 10,
-      categoryId: 1
-    }),
-
-    Product.bulkCreate(dummyProducts)
+      categoryId: 4
+    })
   ])
 
   const orders = await Promise.all([
