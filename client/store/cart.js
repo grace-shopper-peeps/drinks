@@ -45,7 +45,7 @@ export const deleteCartItem = product => {
   return async dispatch => {
     try {
       console.log('this is your redux product', product)
-      await axios.delete('/api/cart', product)
+      await axios.delete('/api/cart', {data: {id: product.id}})
       dispatch(deleteItem(product))
     } catch (err) {
       console.log('trouble removing item from cart')

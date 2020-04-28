@@ -114,10 +114,15 @@ router.post('/', async (req, res, next) => {
 router.delete('/', async (req, res, next) => {
   try {
     if (req.user) {
-      console.log('PINEAPPPLESS', req.body)
       const user = await User.findByPk(req.user.id)
       const orders = await user.getOrders({where: {status: 'Created'}}) //need to figure put why req.body doesn't exist
-      await orders[0].removeProduct(req.body.id)
+      // await orders[0].removeProduct(req.body.id)
+      await ProductOrders.destroy({
+        where: {
+          productId: req.body.id,
+          orderId: orders[0].id
+        }
+      })
       res.sendStatus(204)
     }
   } catch (err) {

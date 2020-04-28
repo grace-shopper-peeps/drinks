@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {deleteCartItem} from '../store/cart'
+import {deleteCartItem, updateProductQuantity} from '../store/cart'
 
 class CartProduct extends React.Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class CartProduct extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
   }
-  com
 
   removeItem(product) {
     this.props.removeItem(product)
@@ -18,6 +17,7 @@ class CartProduct extends React.Component {
 
   handleChange(evt) {
     this.setState({quantity: evt.target.quantity.value})
+    // this.props.updateItem(this.state.quantity)
   }
 
   render() {
@@ -52,5 +52,6 @@ class CartProduct extends React.Component {
 }
 const mapDispatch = dispatch => ({
   removeItem: item => dispatch(deleteCartItem(item))
+  // updateItem: (quantityObj) => dispatch(updateProductQuantity(quantityObj)),
 })
 export default connect(null, mapDispatch)(CartProduct)
