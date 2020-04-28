@@ -1,10 +1,27 @@
 import React from 'react'
+import StripeCheckout from 'react-stripe-checkout'
 
-class Checkout extends React.Component {
-  // we may want them redirected to another page that has an order summary and payment info
+export default class TakeMoney extends React.Component {
+  onToken = token => {
+    fetch('/save-stripe-token', {
+      method: 'POST',
+      body: JSON.stringify(token)
+    }).then(response => {
+      response.json().then(data => {
+        alert(`We are in business, ${data.email}`)
+      })
+    })
+  }
+
+  // ...
+
   render() {
-    return <button type="submit">Checkout</button>
+    return (
+      // ...
+      <StripeCheckout
+        token={this.onToken}
+        stripeKey="pk_test_AqTzNNToEijqjx9ZOGUiqI7q00xE0x9PfI"
+      />
+    )
   }
 }
-
-export default Checkout
