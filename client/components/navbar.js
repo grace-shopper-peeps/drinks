@@ -1,8 +1,8 @@
 import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+// import Row from 'react-bootstrap/Row'
+// import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -10,49 +10,96 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => {
   return (
-    <Container>
-      <Row>
-        <Col>
-          <h1 id="top">Quarantini</h1>
-        </Col>
-        <Col>
-          <nav id="nav-bar">
-            {isLoggedIn ? (
-              <div>
-                {/* The navbar will show these links after you log in */}
-                <Link className="link" to="/home">
-                  Home
-                </Link>
-                <a href="#" onClick={handleClick}>
-                  Logout
-                </a>
-              </div>
-            ) : (
-              <div>
-                {/* The navbar will show these links before you log in */}
-                <Link className="link" to="/login">
-                  Login
-                </Link>
-                <Link to="/signup">Sign Up</Link>
-              </div>
-            )}
-            <Link className="link" to="/products">
-              All Products
-            </Link>
-            <Link className="link" to="/cart">
-              Cart
-            </Link>
-            <Link className="link" to="/orders">
-              All Orders
-            </Link>
-            <Link className="link" to="/users">
-              All User
-            </Link>
-          </nav>
-        </Col>
-        <hr />
-      </Row>
-    </Container>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">
+        <h2>Quarantini</h2>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon" />
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        {isLoggedIn ? (
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">
+                Home <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#" onClick={handleClick}>
+                Logout
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/products">
+                Products
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/cart">
+                Cart
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/orders">
+                All Orders
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/users">
+                All Users
+              </a>
+            </li>
+          </ul>
+        ) : (
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">
+                Home <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/login">
+                Login
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/signup">
+                Sign Up
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/products">
+                Products
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/cart">
+                Cart
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/orders">
+                All Orders
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/users">
+                All Users
+              </a>
+            </li>
+          </ul>
+        )}
+      </div>
+    </nav>
   )
 }
 

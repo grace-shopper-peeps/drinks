@@ -10,7 +10,8 @@
 body {
   font-family: Amb;
   font-size: larger;
-  display: flex;
+  color: black;
+  /* display: flex; */
 }
 
 a {
@@ -27,26 +28,29 @@ form div {
 }
 
 nav {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 1em;
-  border-style: solid;
-  padding: 15px;
-  border-radius: 50px;
+  /* padding: 15px; */
+  display: grid;
+  text-align: center;
+
+  /* flex-wrap: wrap; */
+
+  /* color:black */
+  /* border-style: solid;
+  
+  /* border-radius: 50px;
   font-family: Amb;
   font-weight: 900;
   color: white;
-  border-width: 5px;
-  font-size: 1.5em;
+  border-width: 5px; */
+  font-size: 1.5rem;
 }
-
+#carouselExampleSlidesOnly.carousel-inner {
+  display: flex;
+  background-color: black;
+}
 #top {
   font-family: Amb;
   font-size: 90px;
-}
-
-.container {
-  display: grid;
 }
 
 .drinks {
