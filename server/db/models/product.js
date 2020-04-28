@@ -20,8 +20,7 @@ const Product = db.define('product', {
   },
   image: {
     type: Sequelize.TEXT,
-    defaultValue:
-      'https://files.slack.com/files-pri/T024FPYBQ-F01277GCKRT/beer.png'
+    defaultValue: '/beer.png'
   }
 })
 

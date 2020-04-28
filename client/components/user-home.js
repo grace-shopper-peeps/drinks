@@ -12,7 +12,7 @@ export const UserHome = props => {
   return (
     <div>
       {!isAdmin ? (
-        <h3>Welcome, {email}</h3>
+        <h3 className="animated fadeIn">Welcome, {email}</h3>
       ) : (
         <div>
           <h3>Welcome, admin {email}</h3>

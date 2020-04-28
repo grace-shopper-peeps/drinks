@@ -1,37 +1,105 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = (props, {handleClick, isLoggedIn}) => {
   return (
-    <div>
-      <h1>Quarantini</h1>
-      <nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">
+        <h2>Quarantini</h2>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon" />
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
         {isLoggedIn ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </div>
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">
+                Home <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#" onClick={handleClick}>
+                Logout
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/products">
+                Products
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/cart">
+                Cart
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/orders">
+                All Orders
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/users">
+                All Users
+              </a>
+            </li>
+          </ul>
         ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">
+                Home <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/login">
+                Login
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/signup">
+                Sign Up
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/products">
+                Products
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/cart">
+                Cart
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/orders">
+                All Orders
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/users">
+                All Users
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href={`/users/myProfile/${props.user.id}`}>
+                My Profile
+              </a>
+            </li>
+          </ul>
         )}
-        <Link to="/products">All Products</Link>
-        <Link to="/cart">Cart</Link>
-        <Link to="/orders">All Orders</Link>
-        <Link to="/users">All User</Link>
-        <Link to={`/users/myProfile/${props.user.id}`}>My Profile</Link>
-      </nav>
-      <hr />
-    </div>
+      </div>
+    </nav>
   )
 }
 

@@ -54,7 +54,10 @@ router.post('/', async (req, res, next) => {
       if (productOrderExist[0]) {
         console.log('PEEACHHHESSS')
         console.log('productOrder', productOrderExist[0])
-        const productUpdate = productOrderExist[0]
+        //const productUpdate = productOrderExist[0]
+        const productUpdate = await ProductOrders.findByPk(
+          productOrderExist[0].id
+        )
         res.json(
           await productUpdate.update({
             quantity: (productOrderExist[0].quantity += req.body.quantity)

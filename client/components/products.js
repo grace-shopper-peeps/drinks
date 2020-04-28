@@ -4,6 +4,7 @@ import {getAllProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import AddToCart from './addToCart'
 import DeleteProduct from './deleteProduct'
+import AddProduct from './addProduct'
 
 class Products extends React.Component {
   componentDidMount() {
@@ -16,7 +17,8 @@ class Products extends React.Component {
     console.log(this.props, 'this.props of products')
     return (
       <div>
-        <div>
+        <AddProduct />
+        <div className="container">
           {products.map(product => {
             return (
               <div className="drinks" key={product.id}>

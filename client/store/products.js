@@ -2,6 +2,7 @@ import axios from 'axios'
 import {DELETE_SINGLE_PRODUCT} from './product'
 const ALL_PRODUCTS = 'ALL_PRODUCTS'
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+const ADD_PRODUCT = 'ADD_PRODUCT'
 
 const updateProduct = product => {
   console.log('product', product)
@@ -15,6 +16,13 @@ const allProducts = products => {
   return {
     type: ALL_PRODUCTS,
     products
+  }
+}
+
+const addProduct = product => {
+  return {
+    type: ADD_PRODUCT,
+    product
   }
 }
 
@@ -32,6 +40,18 @@ export const getAllProducts = () => {
       dispatch(allProducts(data))
     } catch (err) {
       console.log(err)
+    }
+  }
+}
+
+export const postProductThunk = product => {
+  return async dispatch => {
+    try {
+      const response = await axios.post('/api/products', product)
+      const newProduct = response.data
+      dispatch(addProduct(newProduct))
+    } catch (err) {
+      console.log('there was an error posting the product', err)
     }
   }
 }
@@ -72,6 +92,8 @@ const allProductsReducer = (state = initialState, action) => {
       })
     case UPDATE_PRODUCT:
       return action.product
+    case ADD_PRODUCT:
+      return [...state, action.product]
     default:
       return state
   }
