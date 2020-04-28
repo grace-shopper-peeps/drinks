@@ -64,10 +64,9 @@ class OrderList extends React.Component {
                   <div>
                     <Link to={`/orders/${order.id}`}>
                       <h3>User: {order.user.email}</h3>
-                      <div>Status: {order.status}</div>
+                      <h3>Status: {order.status}</h3>
+                      <div>Date Created: {order.createdAt.slice(0, 10)}</div>
                     </Link>
-                    <h3>Status: {order.status}</h3>
-                    <div>Date Created: {order.createdAt.slice(0, 10)}</div>
                   </div>
                 </li>
               )
