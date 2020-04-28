@@ -44,6 +44,7 @@ export const addProductToCart = product => {
 export const deleteCartItem = product => {
   return async dispatch => {
     try {
+      console.log('this is your redux product', product)
       await axios.delete('/api/cart', product)
       dispatch(deleteItem(product))
     } catch (err) {
@@ -55,14 +56,15 @@ export const deleteCartItem = product => {
 function cart(state = [], action) {
   switch (action.type) {
     case GET_ORDER_PRODUCTS:
-      return [...state, action.products].filter(item => {
-        return !Array.isArray(item)
-      })
+      return action.products
     case ADD_PRODUCT:
-      return [...state, action.addedProducts]
-    // .filter(product => {
-    //   return product.id !== action.product.id
-    // })
+      return state.map(product => {
+        if (product.id === action.addedProducts.productId) {
+          return action.addedProducts
+        } else {
+          return product
+        }
+      })
     case DELETE_ITEM:
       return state.filter(product => product.id !== action.productId)
     default:
