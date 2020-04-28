@@ -16,7 +16,7 @@ router.get('/', isAdmin, async (req, res, next) => {
 })
 router.get('/:orderId', isAdmin, async (req, res, next) => {
   try {
-    const orders = await Order.findByPk(req.params.orderId)
+    const orders = await Order.findByPk(req.params.orderId, {include: User})
     res.json(orders)
   } catch (err) {
     next(err)

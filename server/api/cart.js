@@ -40,6 +40,7 @@ router.post('/', async (req, res, next) => {
         }
       ]
     })
+    // console.log('LETS SEE THE MAGIC ', orderExist[0].__proto__)
     // console.log('testing ORDER', orderExist[0].products)
 
     if (orderExist[0]) {
@@ -52,12 +53,11 @@ router.post('/', async (req, res, next) => {
       })
       if (productOrderExist[0]) {
         console.log('PEEACHHHESSS')
-        const productUpdate = await ProductOrders.findByPk(
-          productOrderExist[0].id
-        )
+        console.log('productOrder', productOrderExist[0])
+        const productUpdate = productOrderExist[0]
         res.json(
           await productUpdate.update({
-            quantity: req.body.quantity
+            quantity: (productOrderExist[0].quantity += req.body.quantity)
           })
         )
       } else {

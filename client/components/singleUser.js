@@ -29,6 +29,7 @@ export class SingleUser extends React.Component {
           this.props.singleUser.orders.map(order => {
             return (
               <div key={order.id}>
+                <h2>Orders:</h2>
                 <h2>id:</h2>
                 <p>{order.id}</p>
                 <h2>status:</h2>
