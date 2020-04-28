@@ -58,6 +58,7 @@ router.post('/', async (req, res, next) => {
         const productUpdate = await ProductOrders.findByPk(
           productOrderExist[0].id
         )
+        //const productUpdate = productOrderExist[0]
         res.json(
           await productUpdate.update({
             quantity: (productOrderExist[0].quantity += req.body.quantity)
