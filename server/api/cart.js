@@ -102,14 +102,38 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-// router.put('/',async(req,res,next)=>{
-//   try{
-
-//   }
-//   catch(err){
-//     next(err)
-//   }
-// })
+router.put('/', async (req, res, next) => {
+  try {
+    console.log('GREEEN APPLE', req.body)
+    if (req.user) {
+      const order = await Orders.findAll({
+        where: {
+          userId: req.user.id,
+          status: 'Created'
+        }
+      })
+      await ProductOrders.update(
+        {quantity: req.body.quantity},
+        {
+          where: {
+            orderId: order[0].id,
+            productId: req.body.id
+          }
+        }
+      )
+      const updatedItemQuantity = await ProductOrders.findAll({
+        where: {
+          productId: req.body.id,
+          orderId: order[0].id
+        }
+      })
+      console.log('RED APPPLE', updatedItemQuantity[0])
+      res.json(updatedItemQuantity[0])
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.delete('/', async (req, res, next) => {
   try {

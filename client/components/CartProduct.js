@@ -1,6 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {deleteCartItem, updateProductQuantity} from '../store/cart'
+import {
+  deleteCartItem,
+  updateProductQuantity,
+  fetchOrderProducts
+} from '../store/cart'
 
 class CartProduct extends React.Component {
   constructor(props) {
@@ -11,25 +15,37 @@ class CartProduct extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+  // componentDidMount() {
+  //   this.props.getCart()
+  // }
+
   removeItem(product) {
     this.props.removeItem(product)
   }
 
   handleChange(evt) {
-    this.setState({quantity: evt.target.quantity.value})
-    // this.props.updateItem(this.state.quantity)
+    // console.log(evt.target.value)
+    this.setState({quantity: evt.target.value})
+    const id = this.props.cartItem.id
+      ? this.props.cartItem.id
+      : this.props.cartItem.productId
+    console.log('handle change cartItem', id)
+    this.props.updateItem({
+      quantity: evt.target.value,
+      id: id
+    })
   }
 
   render() {
     const cartItem = this.props.cartItem
-    console.log('cartItem', cartItem)
+    console.log(' before cartItem', cartItem)
     return (
       <p>
         <img src={cartItem.image} />
         product:
         <b>{cartItem.title}</b>
         ---- qty:
-        <b>{cartItem.throughProductOrders.quantity}</b>
+        <b>{cartItem.quantity}</b>
         ---- price:
         <b>{cartItem.price}</b>
         -----total Price:
@@ -51,7 +67,8 @@ class CartProduct extends React.Component {
   }
 }
 const mapDispatch = dispatch => ({
-  removeItem: item => dispatch(deleteCartItem(item))
-  // updateItem: (quantityObj) => dispatch(updateProductQuantity(quantityObj)),
+  removeItem: item => dispatch(deleteCartItem(item)),
+  updateItem: quantityObj => dispatch(updateProductQuantity(quantityObj)),
+  getCart: () => dispatch(fetchOrderProducts())
 })
 export default connect(null, mapDispatch)(CartProduct)

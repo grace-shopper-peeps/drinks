@@ -3,6 +3,7 @@ import axios from 'axios'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const GET_ORDER_PRODUCTS = 'GET_ORDER_PRODUCTS'
 const DELETE_ITEM = 'DELETE_ITEM'
+const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
 
 export const getOrderProducts = products => ({
   type: GET_ORDER_PRODUCTS,
@@ -17,6 +18,11 @@ export const deleteItem = product => ({
 export const addProducts = addedProducts => ({
   type: ADD_PRODUCT,
   addedProducts
+})
+
+export const updateItemQuantity = itemQuantityUpdated => ({
+  type: UPDATE_ITEM_QUANTITY,
+  itemQuantityUpdated
 })
 
 export const fetchOrderProducts = () => {
@@ -53,6 +59,19 @@ export const deleteCartItem = product => {
   }
 }
 
+export const updateProductQuantity = item => {
+  return async dispatch => {
+    try {
+      console.log('this is the redux item', item)
+      const {data} = await axios.put('/api/cart', item)
+      console.log('some redux data', data)
+      dispatch(updateItemQuantity(data))
+    } catch (err) {
+      console.log('could not update product quantity for this order')
+    }
+  }
+}
+
 function cart(state = [], action) {
   switch (action.type) {
     case GET_ORDER_PRODUCTS:
@@ -61,6 +80,15 @@ function cart(state = [], action) {
       return state.map(product => {
         if (product.id === action.addedProducts.productId) {
           return action.addedProducts
+        } else {
+          return product
+        }
+      })
+    case UPDATE_ITEM_QUANTITY:
+      return state.map(product => {
+        console.log('meeehhhpp', action)
+        if (product.id === action.itemQuantityUpdated.productId) {
+          return action.itemQuantityUpdated
         } else {
           return product
         }
