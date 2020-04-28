@@ -6,7 +6,8 @@ const User = require('../db/models/user')
 
 router.get('/', async (req, res, next) => {
   if (req.user) {
-    const newOrder = await Orders.findAll({
+    const newOrder = await Orders.findOrCreate({
+      //may want to do findOrCreate
       where: {
         userId: req.user.id,
         status: 'Created'
@@ -19,7 +20,7 @@ router.get('/', async (req, res, next) => {
       ]
     })
 
-    console.log('NEWW ORDDEEERRR', newOrder[0].products)
+    console.log('NEWW ORDDEEERRR', newOrder[0].products) //newOrders wont have products
     res.json(newOrder[0].products)
   } else {
     res.json(['no cart found'])
@@ -40,9 +41,6 @@ router.post('/', async (req, res, next) => {
         }
       ]
     })
-    // console.log('LETS SEE THE MAGIC ', orderExist[0].__proto__)
-    // console.log('testing ORDER', orderExist[0].products)
-
     if (orderExist[0]) {
       console.log('LEMMONNNNS')
       const productOrderExist = await ProductOrders.findAll({
@@ -52,18 +50,23 @@ router.post('/', async (req, res, next) => {
         }
       })
       if (productOrderExist[0]) {
-        console.log('PEEACHHHESSS')
-        console.log('productOrder', productOrderExist[0])
-        //const productUpdate = productOrderExist[0]
-        const productUpdate = await ProductOrders.findByPk(
-          productOrderExist[0].id
+        console.log('BERRRIES')
+        await ProductOrders.update(
+          {quantity: (productOrderExist[0].quantity += req.body.quantity)},
+          {
+            where: {
+              productId: productOrderExist[0].productId,
+              orderId: productOrderExist[0].orderId
+            }
+          }
         )
-        //const productUpdate = productOrderExist[0]
-        res.json(
-          await productUpdate.update({
-            quantity: (productOrderExist[0].quantity += req.body.quantity)
-          })
-        )
+        const updatedProductOrder = await ProductOrders.findAll({
+          where: {
+            productId: productOrderExist[0].productId,
+            orderId: productOrderExist[0].orderId
+          }
+        })
+        res.json(updatedProductOrder[0])
       } else {
         console.log('COCONNNUUTT')
         req.body.orderId = orderExist[0].id
@@ -81,8 +84,6 @@ router.post('/', async (req, res, next) => {
         userId: req.user.id,
         status: 'Created'
       })
-      // Product(req.body.id)
-      // console.log('GRAPESSS', newOrder)
       req.body.orderId = newOrder.id
       const firstProduct = await ProductOrders.create({
         orderId: newOrder.id,
@@ -90,7 +91,6 @@ router.post('/', async (req, res, next) => {
         quantity: req.body.quantity
       })
       console.log('APPPLLLEEE', firstProduct)
-      // the req.body now needs to grab the quantity off of the state and send it back here
       res.json(firstProduct)
     }
   } catch (err) {
@@ -102,11 +102,21 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+// router.put('/',async(req,res,next)=>{
+//   try{
+
+//   }
+//   catch(err){
+//     next(err)
+//   }
+// })
+
 router.delete('/', async (req, res, next) => {
   try {
     if (req.user) {
+      console.log('PINEAPPPLESS', req.body)
       const user = await User.findByPk(req.user.id)
-      const orders = await user.getOrders({where: {status: 'Created'}})
+      const orders = await user.getOrders({where: {status: 'Created'}}) //need to figure put why req.body doesn't exist
       await orders[0].removeProduct(req.body.id)
       res.sendStatus(204)
     }

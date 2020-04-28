@@ -23,6 +23,18 @@ router.get('/:orderId', isAdmin, async (req, res, next) => {
   }
 })
 
+router.put('/:orderId', isAdmin, async (req, res, next) => {
+  try {
+    const orders = await Order.findByPk(req.params.orderId, {include: User})
+    const updated = await orders.update({
+      status: req.body.status
+    })
+    res.json(updated)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // router.post('/', async (req, res, next) => {
 //   try {
 //     const orders = await Order.create(req.body)
