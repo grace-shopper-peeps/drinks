@@ -25,8 +25,9 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/', isAdmin, async (req, res, next) => {
   try {
-    const products = await Product.create(req.body)
-    res.json(products)
+    console.log('REQ BODYYYYYYYYYYYYYYYYYYYY, ', req.body)
+    const product = await Product.create(req.body)
+    res.json(product)
   } catch (err) {
     next(err)
   }
