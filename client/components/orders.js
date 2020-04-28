@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getAllOrders, setVisibilityFilter} from '../store/orders'
+import {Link} from 'react-router-dom'
 // import {FilterForm} from './filterForm'
 
 class OrderList extends React.Component {
@@ -59,8 +60,10 @@ class OrderList extends React.Component {
               return (
                 <li key={order.id}>
                   <div>
-                    <h3>User: {order.user.email}</h3>
-                    <div>Status: {order.status}</div>
+                    <Link to={`/orders/${order.id}`}>
+                      <h3>User: {order.user.email}</h3>
+                      <div>Status: {order.status}</div>
+                    </Link>
                   </div>
                 </li>
               )

@@ -10,6 +10,7 @@ import OrderList from './components/orders'
 import SingleUser from './components/singleUser'
 import MyProfile from './components/MyProfile'
 import {me} from './store'
+import SingleOrder from './components/SingleOrder'
 /**
  * COMPONENT
  */
@@ -35,7 +36,8 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route exact path="/users" component={UserList} />
             <Route exact path="/users/:userId" component={SingleUser} />
-            <Route path="/orders" component={OrderList} />
+            <Route exact path="/orders" component={OrderList} />
+            <Route path="/orders/:orderId" component={SingleOrder} />
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route path="/users/myProfile/:userId" component={MyProfile} />
           </Switch>

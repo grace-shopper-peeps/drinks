@@ -11,6 +11,7 @@ import allUsersReducer from './allUsers'
 import selectUserReducer from './singleUser'
 import allOrdersReducer from './orders'
 import visibilityReducer from './filter'
+import singleOrderReducer from './singleOrder'
 
 const reducer = combineReducers({
   user,
@@ -21,7 +22,8 @@ const reducer = combineReducers({
   cart,
   users: allUsersReducer,
   selectedUser: selectUserReducer,
-  visibility: visibilityReducer
+  visibility: visibilityReducer,
+  singleOrder: singleOrderReducer
 })
 
 const middleware = composeWithDevTools(
