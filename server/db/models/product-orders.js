@@ -25,8 +25,14 @@ const ProductOrders = db.define('throughProductOrders', {
   }
 })
 
-ProductOrders.addHook('beforeCreate', (instance, options) => {
+ProductOrders.beforeCreate((instance, options) => {
   return (instance.purchasePrice = instance.quantity * instance.price)
 })
+// ProductOrders.afterUpdate((instance, options) => {
+//   console.log('hittin beforeUpdate hook!')
+//   console.log('instance', instance)
+//   return (instance.purchasePrice =
+//     Number(instance.quantity) * Number(instance.price))
+// })
 
 module.exports = ProductOrders
