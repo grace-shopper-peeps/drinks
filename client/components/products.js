@@ -40,7 +40,7 @@ class Products extends React.Component {
                 key={product.id}
               >
                 <img src={product.image} class="pic" />
-                <div class="media-body">
+                <div class="media-body" href="/">
                   <p class="product-title">{product.title}</p>
                   <p class="product-description">{product.description}</p>
                   <p class="product-description">price:{product.price}</p>
@@ -49,6 +49,9 @@ class Products extends React.Component {
                     {product.category ? product.category.name : 'null'}
                   </p>
                   <AddToCart product={product} />
+                  <a href={`/products/${product.id}`} class="stretched-link">
+                    checkout our {product.title}
+                  </a>
 
                   {user && user.isAdmin ? (
                     <DeleteProduct product={product} />
