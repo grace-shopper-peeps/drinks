@@ -1,29 +1,21 @@
-// const router = require('express').Router()
+const router = require('express').Router()
+const stripe = require('stripe')('sk_test_YQIj5qePE15uWbuDkYb5b4P500Y3P7JdZm')
+const Order = require('../db/models/orders')
 
-// const session = await stripe.checkout.sessions.create({
-//   payment_method_types: ['card'],
-//   line_items: [{
-//     name: 'T-shirt',
-//     description: 'Comfortable cotton t-shirt',
-//     images: ['https://example.com/t-shirt.png'],
-//     amount: 500,
-//     currency: 'usd',
-//     quantity: 1,
-//   }],
-//   success_url: 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
-//   cancel_url: 'https://example.com/cancel',
-// });
-// router.get('/secret', async (req, res, next) => {
-//   try {
-//     const intent = await stripe.paymentIntents.create({
-//       amount: 1000,
-//       currency: 'usd',
-//       paymentMethodTypes: ['card'],
-//       receiptEmail: 'jenny.rosen@example.com',
-//     })
-//     res.json({clientSecret: intent.client_secret})
-//   } catch (err) {
-//     console.log(err)
-//     next(err)
-//   }
-// })
+router.post('/stripe', async (req, res, next) => {
+  try {
+    console.log(req.body.token, 'req body')
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 1000,
+      currency: 'usd',
+      payment_method_types: ['card'],
+      receipt_email: req.body.token.email
+    })
+    let updateOrd = await Order.findByPk(req.body.token.orderId)
+    await updateOrd.update({status: 'Completed'})
+    res.json(paymentIntent)
+  } catch (err) {
+    console.log(err, 'this is a stripe test')
+  }
+})
+module.exports = router

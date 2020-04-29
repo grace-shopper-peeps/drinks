@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 //import {fetchAllUsers} from '../store/allUsers'
 import {getSingleUser, updateSingleUser} from '../store/singleUser'
 import {updateUserThunk} from '../store/user'
+import {Button, Card, Form} from 'react-bootstrap'
+
 export class MyProfile extends React.Component {
   constructor() {
     super()
@@ -35,26 +37,34 @@ export class MyProfile extends React.Component {
     console.log('in render', this.props.user)
     return (
       <div>
-        <h2>My Email:</h2>
-        <p>{this.props.user.email}</p>
-        {/* <h2>My Id:</h2>
-     <p>{this.props.user.id}</p>
-     <h2>Admin:</h2>
-     <p>{this.props.user.isAdmin ? 'true' : 'false'}</p> */}
-        <button onClick={this.changeProfile} type="button">
-          Edit My Profile
-        </button>
-        {this.state.showForm ? (
-          <form onSubmit={this.handleSubmit}>
-            <input
-              onChange={this.handleChange}
-              name="email"
-              value={this.state.email}
-              placeholder="email"
-            />
-            <button type="submit">Submit</button>
-          </form>
-        ) : null}
+        <Card id="carded">
+          <Card.Header as="h5">My Email:</Card.Header>
+          <Card.Body>
+            <Card.Title />
+            <Card.Text>
+              {' '}
+              {this.props.user.email ? this.props.user.email : 'No email'}
+            </Card.Text>
+
+            <Button onClick={this.changeProfile} type="button">
+              Change Status
+            </Button>
+            {this.state.showForm ? (
+              <Form onSubmit={this.handleSubmit}>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email address:</Form.Label>
+                  <input
+                    onChange={this.handleChange}
+                    name="email"
+                    value={this.state.email}
+                    placeholder="email"
+                  />
+                </Form.Group>
+                <Button type="submit">Submit</Button>
+              </Form>
+            ) : null}
+          </Card.Body>
+        </Card>
       </div>
     )
   }

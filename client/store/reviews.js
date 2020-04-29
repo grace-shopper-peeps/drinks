@@ -1,11 +1,19 @@
 import axios from 'axios'
 
 const GET_ALL_REVIEWS = 'GET_ALL_REVIEWS'
+const POST_REVIEW = 'POST_REVIEW'
 
 const allReviews = reviews => {
   return {
     type: GET_ALL_REVIEWS,
     reviews
+  }
+}
+
+const postReview = review => {
+  return {
+    type: POST_REVIEW,
+    review
   }
 }
 
@@ -21,12 +29,25 @@ export const getAllReviews = () => {
   }
 }
 
+export const postReviewThunk = review => {
+  return async dispatch => {
+    try {
+      await axios.post('/api/reviews')
+      dispatch(postReview(review))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 const initialState = []
 
 const allReviewsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_REVIEWS:
       return action.reviews
+    case POST_REVIEW:
+      return [...state, action.review]
     default:
       return state
   }

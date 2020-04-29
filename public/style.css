@@ -36,7 +36,7 @@ nav {
 
   /* color:black */
   /* border-style: solid;
-  
+
   /* border-radius: 50px;
   font-family: Amb;
   font-weight: 900;
@@ -65,4 +65,13 @@ nav {
 
 .link {
   margin: 20px;
+}
+#orderTable {
+  margin: 5px;
+  width: 800px;
+  float: left;
+}
+#carded {
+  width: 300px;
+  margin: 10px;
 }

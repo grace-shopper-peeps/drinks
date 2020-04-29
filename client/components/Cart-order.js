@@ -29,9 +29,7 @@ class Cart extends React.Component {
         <h1>Cart Summary:</h1>
         <div>
           {cartItems.length > 0
-            ? cartItems.map(cartItem => (
-                <CartProduct key={cartItem.id} cartItem={cartItem} />
-              ))
+            ? cartItems.map(cartItem => <CartProduct cartItem={cartItem} />)
             : "You're cart is empty, start shoppin!"}
         </div>
         <b>Total Items: {cartItems.length}</b>
