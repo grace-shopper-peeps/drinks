@@ -119,6 +119,9 @@ nav {
 .product-description {
   color: grey;
 }
+li {
+  position: relative;
+}
 
 .product-title {
   color: black;

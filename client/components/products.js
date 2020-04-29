@@ -49,9 +49,7 @@ class Products extends React.Component {
                     {product.category ? product.category.name : 'null'}
                   </p>
                   <AddToCart product={product} />
-                  <a href={`/products/${product.id}`} class="stretched-link">
-                    checkout our {product.title}
-                  </a>
+                  <a href={`/products/${product.id}`} class="stretched-link" />
 
                   {user && user.isAdmin ? (
                     <DeleteProduct product={product} />
