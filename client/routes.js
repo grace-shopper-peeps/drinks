@@ -12,6 +12,7 @@ import MyProfile from './components/MyProfile'
 import LandingPage from './components/LandingPage'
 import {me} from './store'
 import SingleOrder from './components/SingleOrder'
+import {ThankYou} from './components/thankYou'
 /**
  * COMPONENT
  */
@@ -42,6 +43,7 @@ class Routes extends Component {
             <Route path="/orders/:orderId" component={SingleOrder} />
             <Route exact path="/users/:userId" component={SingleUser} />
             <Route path="/users/myProfile/:userId" component={MyProfile} />
+            <Route path="/thank-you" component={ThankYou} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

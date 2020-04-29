@@ -13,6 +13,28 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/filter/:category', async (req, res, next) => {
+  try {
+    let cat =
+      req.params.category.charAt(0).toUpperCase() + req.params.category.slice(1)
+    let liquor = await Category.findAll({
+      where: {
+        name: cat
+      }
+    })
+    let prod = await Product.findAll({
+      include: [Category],
+      where: {
+        categoryId: liquor[0].id
+      }
+    })
+    console.log(prod)
+    res.json(prod)
+  } catch (err) {
+    next(err)
+  }
+})
 //might need to be changed
 router.get('/:productId', async (req, res, next) => {
   try {

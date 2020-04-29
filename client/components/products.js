@@ -25,7 +25,7 @@ class Products extends React.Component {
               <h1 class="display-4">20% off all Bourbons!</h1>
               <p class="lead">
                 We're so excited for you to join us! Take advantage of all our
-                liquors from across the globe.
+                liquors from across the globe
               </p>
             </div>
           </div>

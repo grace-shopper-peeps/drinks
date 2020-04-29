@@ -18,6 +18,12 @@ router.post('/login', async (req, res, next) => {
     next(err)
   }
 })
+router.post('/logout', (req, res) => {
+  console.log('is this hitting')
+  req.logout()
+  req.session.destroy()
+  res.redirect('/')
+})
 
 router.post('/signup', async (req, res, next) => {
   try {
@@ -30,12 +36,6 @@ router.post('/signup', async (req, res, next) => {
       next(err)
     }
   }
-})
-
-router.post('/logout', (req, res) => {
-  req.logout()
-  req.session.destroy()
-  res.redirect('/')
 })
 
 router.get('/me', (req, res) => {

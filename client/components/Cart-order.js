@@ -41,7 +41,9 @@ class Cart extends React.Component {
         <h1>Cart Summary:</h1>
         <div>
           {cartItems.length > 0
-            ? cartItems.map(cartItem => <CartProduct cartItem={cartItem} />)
+            ? cartItems.map(cartItem => (
+                <CartProduct cartItem={cartItem} key={cartItem.id} />
+              ))
             : "You're cart is empty, start shoppin!"}
         </div>
         <b>Total Items: {cartItems.length}</b>
@@ -51,8 +53,10 @@ class Cart extends React.Component {
         <p>
           <b>local taxes:2.49</b>
         </p>
-        <p>{/* <b>Total:{this.orderTotal(cartItems)}</b> */}</p>
-        <Checkout />
+        <p>
+          <b>Total:$389.99</b>
+        </p>
+        <Checkout cart={this.props.cart} />
       </div>
     )
   }

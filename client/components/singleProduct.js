@@ -6,6 +6,7 @@ import {ProductReviews} from './singleProductReviews'
 import {getAllReviews} from '../store/reviews'
 import DeleteProduct from './deleteProduct'
 import UpdateProduct from './UpdateProduct'
+import PostReview from './postReview'
 
 export class Product extends React.Component {
   componentDidMount() {
@@ -32,6 +33,9 @@ export class Product extends React.Component {
         ) : (
           ''
         )}
+        <h4>Post A Review: </h4>
+        <PostReview productId={product.id} />
+        <hr />
         <div>Reviews: </div>
         <ProductReviews
           key={product.id}

@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {logout} from '../store'
+import {logout} from '../store/user'
 
 const Navbar = (props, {handleClick, isLoggedIn}) => {
+  console.log(props, 'props on navbar')
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/">
@@ -68,6 +69,7 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
                 Home <span class="sr-only">(current)</span>
               </a>
             </li>
+
             <li class="nav-item active">
               <a class="nav-link" href="/login">
                 Login
@@ -88,19 +90,32 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
                 Cart
               </a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/orders">
-                All Orders
-              </a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/users">
-                All Users
-              </a>
-            </li>
+            {props.user && props.user.isAdmin ? (
+              <li class="nav-item active">
+                <a class="nav-link" href="/orders">
+                  All Orders
+                </a>
+              </li>
+            ) : (
+              ''
+            )}
+            {props.user && props.user.isAdmin ? (
+              <li class="nav-item active">
+                <a class="nav-link" href="/users">
+                  All Users
+                </a>
+              </li>
+            ) : (
+              ''
+            )}
             <li class="nav-item active">
               <a class="nav-link" href={`/users/myProfile/${props.user.id}`}>
                 My Profile
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/#" onClick={handleClick}>
+                Logout
               </a>
             </li>
           </ul>
