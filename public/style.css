@@ -82,6 +82,10 @@ nav {
   width: 300px;
   margin: 10px;
 }
+.list-unstyled {
+  margin-left: 8%;
+  margin-top: 5%;
+}
 
 .media {
   /* border-width: 0.5px;
@@ -91,6 +95,9 @@ nav {
   background-color: white;
   /* width: 5rem;
   height: 5rem; */
+}
+.pic {
+  width: 22%;
 }
 .jumbotron {
   background-color: rgb(180, 121, 43);
@@ -114,7 +121,7 @@ nav {
 }
 
 .product-title {
-  color: rgba(5, 5, 53, 0.973);
+  color: black;
   font-weight: bold;
   font-size: x-large;
 }
