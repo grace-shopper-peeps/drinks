@@ -29,7 +29,9 @@ class Cart extends React.Component {
         <h1>Cart Summary:</h1>
         <div>
           {cartItems.length > 0
-            ? cartItems.map(cartItem => <CartProduct cartItem={cartItem} />)
+            ? cartItems.map(cartItem => (
+                <CartProduct key={cartItem.id} cartItem={cartItem} />
+              ))
             : "You're cart is empty, start shoppin!"}
         </div>
         <b>Total Items: {cartItems.length}</b>
@@ -42,7 +44,7 @@ class Cart extends React.Component {
         <p>
           <b>Total:$389.99</b>
         </p>
-        <Checkout />
+        <Checkout cart={this.props.cart} />
       </div>
     )
   }

@@ -48,38 +48,78 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       title: 'Gin Martini',
-      description: 'Glorified way to drink liquor straight',
-      price: 12,
+      description:
+        'Glorified way to drink liquor straight. Made with London Dry CLM Gin',
+      price: 16,
       quantity: 5,
-      categoryId: 1
+      categoryId: 2,
+      image: './martini.jpg'
     }),
     Product.create({
       title: 'Old Fashioned',
-      description: 'Classic whiskey cocktail',
-      price: 12,
+      description:
+        'Classic whiskey cocktail perfect for a cold, snowy night. Also a glorified way to drink liquor straight.',
+      price: 15,
       quantity: 5,
-      categoryId: 5
+      categoryId: 5,
+      image: '/oldf.jpg'
     }),
     Product.create({
       title: 'Moscow Mule',
-      description: 'Everyone likes it because you get it in a copper mug',
+      description:
+        'Top seller made from gingerbeer + lime + Davidson Potato Vodka. Everyone likes it because you get it in a copper mug.',
       price: 10,
-      quantity: 1,
-      categoryId: 1
+      quantity: 5,
+      categoryId: 1,
+      image: '/moscow.jpg'
     }),
     Product.create({
       title: 'Aperol Spritz',
-      description: 'Bubbles',
-      price: 12,
-      quantity: 5,
-      categoryId: 6
+      description:
+        'Sweet and fruity Aperol mixed with champagne made from the elusive Varnado grape',
+      price: 9,
+      quantity: 15,
+      categoryId: 6,
+      image: '/aperol.jpg'
     }),
     Product.create({
       title: 'Margarita',
       description: 'Tequilaaaa',
+      price: 14,
+      quantity: 20,
+      categoryId: 4,
+      image: '/marg.jpg'
+    }),
+    Product.create({
+      title: 'Gin & Tonic',
+      description: 'Classic British Cocktail',
       price: 10,
       quantity: 10,
+      categoryId: 2,
+      image: '/gandt.jpg'
+    }),
+    Product.create({
+      title: 'Mint Julep',
+      description: 'Bourbon',
+      price: 10,
+      quantity: 12,
       categoryId: 4
+    }),
+    Product.create({
+      title: 'French 75',
+      description: 'Gin + bubbly + lemon. Acceptable to drink before 11am.',
+      price: 10,
+      quantity: 20,
+      categoryId: 2,
+      image: '/french.jpg'
+    }),
+    Product.create({
+      title: 'Piña Colada',
+      description: 'Do you like piña coladas? Getting caught in the rain?',
+      price: 13,
+      quantity: 10,
+      categoryId: 3,
+      image: '/pina.jpg'
     })
   ])
 

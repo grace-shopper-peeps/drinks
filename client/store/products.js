@@ -3,6 +3,7 @@ import {DELETE_SINGLE_PRODUCT} from './product'
 const ALL_PRODUCTS = 'ALL_PRODUCTS'
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 const ADD_PRODUCT = 'ADD_PRODUCT'
+const FILTER_PRODUCTS = 'FILTER_PRODUCTS'
 
 const updateProduct = product => {
   console.log('product', product)
@@ -23,6 +24,13 @@ const addProduct = product => {
   return {
     type: ADD_PRODUCT,
     product
+  }
+}
+
+export const filterProducts = filter => {
+  return {
+    type: FILTER_PRODUCTS,
+    filter
   }
 }
 
@@ -78,6 +86,18 @@ export const updateProductThunk = (product, id) => {
   }
 }
 
+export const filterProductThunk = filter => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/api/products/filter/${filter}`)
+      const prods = response.data
+      dispatch(filterProducts(prods))
+    } catch (err) {
+      console.log('you dumb motherfucker')
+    }
+  }
+}
+
 const initialState = []
 
 const allProductsReducer = (state = initialState, action) => {
@@ -94,6 +114,9 @@ const allProductsReducer = (state = initialState, action) => {
       return action.product
     case ADD_PRODUCT:
       return [...state, action.product]
+    case FILTER_PRODUCTS:
+      console.log(state)
+      return action.filter
     default:
       return state
   }

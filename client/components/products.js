@@ -1,23 +1,52 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getAllProducts} from '../store/products'
+import {getAllProducts, filterProductThunk} from '../store/products'
 import {Link} from 'react-router-dom'
 import AddToCart from './addToCart'
 import DeleteProduct from './deleteProduct'
 import AddProduct from './addProduct'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 class Products extends React.Component {
+  constructor() {
+    super()
+    this.handleSelect = this.handleSelect.bind(this)
+  }
+
   componentDidMount() {
     this.props.getProducts()
+    if (window.location.search !== '') {
+      let urlParams = new URLSearchParams(window.location.search)
+      this.props.filterProds(urlParams.get('filter'))
+    }
+  }
+
+  handleSelect(eventKey) {
+    //refactor/optimize if time allows or after
+    window.location.search = `filter=${eventKey}`
+    this.props.filterProds(eventKey)
     console.log(this.props)
   }
   render() {
     const products = this.props.products || []
     const user = this.props.user
-    console.log(this.props, 'this.props of products')
+
     return (
       <div>
         <AddProduct />
+        <Dropdown onSelect={this.handleSelect}>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Dropdown Button
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item eventKey="vodka">Vodka</Dropdown.Item>
+            <Dropdown.Item eventKey="rum">Rum</Dropdown.Item>
+            <Dropdown.Item eventKey="bourbon">Bourbon</Dropdown.Item>
+            <Dropdown.Item eventKey="gin">Gin</Dropdown.Item>
+            <Dropdown.Item eventKey="tequila">Tequila</Dropdown.Item>
+            <Dropdown.Item eventKey="misc">Misc</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
         <div className="container">
           {products.map(product => {
             return (
@@ -58,7 +87,8 @@ const mapState = state => {
 }
 const mapDispatch = dispatch => {
   return {
-    getProducts: () => dispatch(getAllProducts())
+    getProducts: () => dispatch(getAllProducts()),
+    filterProds: filter => dispatch(filterProductThunk(filter))
   }
 }
 export default connect(mapState, mapDispatch)(Products)
