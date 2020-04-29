@@ -2,14 +2,14 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllUsers} from '../store/allUsers'
 import DeleteUser from './deleteUser'
-
+import {Link} from 'react-router-dom'
+// import SingleUser from './singleUser'
 export class UserList extends React.Component {
   componentDidMount() {
     this.props.allUsers()
   }
 
   render() {
-    console.log(this.props)
     const user = this.props.user
     return user && user.isAdmin ? (
       <div>
@@ -18,8 +18,12 @@ export class UserList extends React.Component {
           {this.props.users.map(eachUser => {
             return (
               <div key={eachUser.id}>
-                <h3>User Email:</h3>
-                <div>{eachUser.email}</div>
+                <Link to={`/users/${eachUser.id}`}>
+                  <h3>Account Id: {eachUser.id}</h3>
+                  <h3>User Email:</h3>
+                  <div>{eachUser.email}</div>
+                </Link>
+                {/* <SingleUser eachUser={eachUser} singleUserId={eachUser.id}/> */}
                 <DeleteUser eachUser={eachUser} />
               </div>
             )

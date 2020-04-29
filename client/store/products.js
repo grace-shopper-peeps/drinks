@@ -1,11 +1,28 @@
 import axios from 'axios'
 import {DELETE_SINGLE_PRODUCT} from './product'
 const ALL_PRODUCTS = 'ALL_PRODUCTS'
+const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+const ADD_PRODUCT = 'ADD_PRODUCT'
+
+const updateProduct = product => {
+  console.log('product', product)
+  return {
+    type: UPDATE_PRODUCT,
+    product
+  }
+}
 
 const allProducts = products => {
   return {
     type: ALL_PRODUCTS,
     products
+  }
+}
+
+const addProduct = product => {
+  return {
+    type: ADD_PRODUCT,
+    product
   }
 }
 
@@ -27,11 +44,34 @@ export const getAllProducts = () => {
   }
 }
 
+export const postProductThunk = product => {
+  return async dispatch => {
+    try {
+      const response = await axios.post('/api/products', product)
+      const newProduct = response.data
+      dispatch(addProduct(newProduct))
+    } catch (err) {
+      console.log('there was an error posting the product', err)
+    }
+  }
+}
+
 export const deleteProductThunk = id => {
   return async dispatch => {
     try {
       await axios.delete(`/api/products/${id}`, id)
       dispatch(deleteSingleProduct(id))
+    } catch (err) {
+      console.log('there was an error deleting the product: ', err)
+    }
+  }
+}
+
+export const updateProductThunk = (product, id) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/products/${id}`, product)
+      dispatch(updateProduct(data))
     } catch (err) {
       console.log('there was an error deleting the product: ', err)
     }
@@ -50,6 +90,10 @@ const allProductsReducer = (state = initialState, action) => {
           return product
         }
       })
+    case UPDATE_PRODUCT:
+      return action.product
+    case ADD_PRODUCT:
+      return [...state, action.product]
     default:
       return state
   }

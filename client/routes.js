@@ -4,10 +4,14 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, Product} from './components'
 import Products from './components/products'
-import Cart from './components/Cart-order'
 import UserList from './components/allUserList'
+import Cart from './components/Cart-order'
+import OrderList from './components/orders'
+import SingleUser from './components/singleUser'
+import MyProfile from './components/MyProfile'
+import LandingPage from './components/LandingPage'
 import {me} from './store'
-
+import SingleOrder from './components/SingleOrder'
 /**
  * COMPONENT
  */
@@ -22,6 +26,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/products/:productId" component={Product} />
@@ -31,7 +36,12 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
-            <Route path="/users" component={UserList} />
+            <Route exact path="/users" component={UserList} />
+            <Route exact path="/users/:userId" component={SingleUser} />
+            <Route exact path="/orders" component={OrderList} />
+            <Route path="/orders/:orderId" component={SingleOrder} />
+            <Route exact path="/users/:userId" component={SingleUser} />
+            <Route path="/users/myProfile/:userId" component={MyProfile} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

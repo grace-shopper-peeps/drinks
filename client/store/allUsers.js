@@ -2,15 +2,11 @@ import axios from 'axios'
 
 const GET_ALL_USERS = 'GET_ALL_USERS'
 const DELETE_USER = 'DELETE_USER'
+const GET_SINGLE_USER = 'GET_SINGLE-USER'
 
 export const getAllUsers = users => ({type: GET_ALL_USERS, users})
-
-export const deleteUser = id => {
-  return {
-    type: DELETE_USER,
-    id
-  }
-}
+export const getSingleUser = id => ({type: GET_SINGLE_USER, id})
+export const deleteUser = id => ({type: DELETE_USER, id})
 
 export const fetchAllUsers = () => {
   return async dispatch => {
@@ -23,10 +19,24 @@ export const fetchAllUsers = () => {
   }
 }
 
+export const getUserThunk = id => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`api/users/${id}`, id)
+      const singleUser = response.data
+      console.log('is the thunk going through')
+      dispatch(getSingleUser(singleUser))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 export const deleteUserThunk = id => {
   return async dispatch => {
     try {
       await axios.delete(`api/users/${id}`, id)
+      console.log('is the thunk going through ')
       dispatch(deleteUser(id))
     } catch (err) {
       console.log(err)
@@ -40,7 +50,14 @@ const allUsersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_USERS:
       return action.users
+    case GET_SINGLE_USER:
+      return [...state].filter(user => {
+        if (user.id === action.id) {
+          return user
+        }
+      })
     case DELETE_USER:
+      console.log(action, 'action')
       return [...state].filter(user => {
         if (user.id !== action.id) {
           return user

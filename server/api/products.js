@@ -25,8 +25,9 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/', isAdmin, async (req, res, next) => {
   try {
-    const products = await Product.create(req.body)
-    res.json(products)
+    console.log('REQ BODYYYYYYYYYYYYYYYYYYYY, ', req.body)
+    const product = await Product.create(req.body)
+    res.json(product)
   } catch (err) {
     next(err)
   }
@@ -39,6 +40,16 @@ router.delete('/:productId', isAdmin, async (req, res, next) => {
     res.sendStatus(204)
   } catch (err) {
     res.json(err)
+    next(err)
+  }
+})
+//needs changing
+router.put('/:productId', isAdmin, async (req, res, next) => {
+  try {
+    const productToUpdate = await Product.findByPk(req.params.productId)
+    const updatedProduct = await productToUpdate.update(req.body)
+    res.json(updatedProduct)
+  } catch (err) {
     next(err)
   }
 })

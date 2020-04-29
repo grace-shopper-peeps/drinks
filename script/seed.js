@@ -1,6 +1,7 @@
 'use strict'
-
+const faker = require('faker')
 const db = require('../server/db')
+
 const {
   User,
   Product,
@@ -10,9 +11,28 @@ const {
   Review
 } = require('../server/db/models')
 
+const usersList = []
+
+for (let i = 0; i < 100; i++) {
+  const userObj = {
+    email: faker.internet.email(),
+    password: faker.internet.password()
+  }
+  usersList.push(userObj)
+}
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+
+  const categories = await Promise.all([
+    Category.create({name: 'Vodka'}),
+    Category.create({name: 'Gin'}),
+    Category.create({name: 'Rum'}),
+    Category.create({name: 'Tequila'}),
+    Category.create({name: 'Bourbon'}),
+    Category.create({name: 'Misc'})
+  ])
 
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
@@ -21,68 +41,54 @@ async function seed() {
       email: 'claire@email.com',
       password: 'quarantini',
       isAdmin: true
-    })
+    }),
+    User.bulkCreate(usersList)
   ])
-
-  const categories = await Promise.all([Category.create({name: 'Vodka'})])
 
   const products = await Promise.all([
     Product.create({
-      title: 'Martini',
+      title: 'Gin Martini',
       description: 'Glorified way to drink liquor straight',
       price: 12,
       quantity: 5,
       categoryId: 1
     }),
     Product.create({
+      title: 'Old Fashioned',
+      description: 'Classic whiskey cocktail',
+      price: 12,
+      quantity: 5,
+      categoryId: 5
+    }),
+    Product.create({
       title: 'Moscow Mule',
       description: 'Everyone likes it because you get it in a copper mug',
       price: 10,
-      quantity: 10
-    }),
-    Product.create({
-      title: 'Martini',
-      description: 'Glorified way to drink liquor straight',
-      price: 12,
-      quantity: 5,
+      quantity: 1,
       categoryId: 1
     }),
     Product.create({
-      title: 'Moscow Mule',
-      description: 'Everyone likes it because you get it in a copper mug',
-      price: 10,
-      quantity: 10
-    }),
-    Product.create({
-      title: 'Martini',
-      description: 'Glorified way to drink liquor straight',
+      title: 'Aperol Spritz',
+      description: 'Bubbles',
       price: 12,
       quantity: 5,
-      categoryId: 1
+      categoryId: 6
     }),
     Product.create({
-      title: 'Moscow Mule',
-      description: 'Everyone likes it because you get it in a copper mug',
+      title: 'Margarita',
+      description: 'Tequilaaaa',
       price: 10,
-      quantity: 10
-    }),
-    Product.create({
-      title: 'Martini',
-      description: 'Glorified way to drink liquor straight',
-      price: 12,
-      quantity: 5,
-      categoryId: 1
-    }),
-    Product.create({
-      title: 'Moscow Mule',
-      description: 'Everyone likes it because you get it in a copper mug',
-      price: 10,
-      quantity: 10
+      quantity: 10,
+      categoryId: 4
     })
   ])
 
   const orders = await Promise.all([
-    Orders.create({price: 22, quantity: 2, userId: 3}),
+    Orders.create({price: 20, quantity: 2, userId: 1}),
+    Orders.create({price: 30, quantity: 5, userId: 2}),
+    Orders.create({price: 22, quantity: 7, userId: 3}),
+    Orders.create({price: 50, quantity: 4, userId: 2}),
+    Orders.create({price: 30, quantity: 2, userId: 3}),
     Orders.create({price: 50, quantity: 3, userId: 2})
     // how does our through table know how many products per order we get?
     //order can have qty total but it also needs to get the productId and orderId from the thorugh table to display in  the order
