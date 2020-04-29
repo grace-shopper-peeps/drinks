@@ -3,6 +3,7 @@ import axios from 'axios'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const GET_ORDER_PRODUCTS = 'GET_ORDER_PRODUCTS'
 const DELETE_ITEM = 'DELETE_ITEM'
+const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
 
 export const getOrderProducts = products => ({
   type: GET_ORDER_PRODUCTS,
@@ -19,9 +20,15 @@ export const addProducts = addedProducts => ({
   addedProducts
 })
 
+export const updateItemQuantity = itemQuantityUpdated => ({
+  type: UPDATE_ITEM_QUANTITY,
+  itemQuantityUpdated
+})
+
 export const fetchOrderProducts = () => {
   return async dispatch => {
     try {
+      console.log('hitting you try in your thunk')
       const {data} = await axios.get(`api/cart/`)
       dispatch(getOrderProducts(data)) //expect data to be an array with all the products with that orderId
     } catch (err) {
@@ -33,6 +40,7 @@ export const fetchOrderProducts = () => {
 export const addProductToCart = product => {
   return async dispatch => {
     try {
+      console.log('hitting redux thunk', product)
       const {data} = await axios.post('/api/cart', product)
       dispatch(addProducts(data))
     } catch (err) {
@@ -45,10 +53,23 @@ export const deleteCartItem = product => {
   return async dispatch => {
     try {
       console.log('this is your redux product', product)
-      await axios.delete('/api/cart', product)
+      await axios.delete('/api/cart', {data: {id: product.id}})
       dispatch(deleteItem(product))
     } catch (err) {
       console.log('trouble removing item from cart')
+    }
+  }
+}
+
+export const updateProductQuantity = item => {
+  return async dispatch => {
+    try {
+      console.log('this is the redux item', item)
+      const {data} = await axios.put('/api/cart', item)
+      console.log('some redux data', data)
+      dispatch(updateItemQuantity(data))
+    } catch (err) {
+      console.log('could not update product quantity for this order')
     }
   }
 }
@@ -59,8 +80,25 @@ function cart(state = [], action) {
       return action.products
     case ADD_PRODUCT:
       return state.map(product => {
-        if (product.id === action.addedProducts.productId) {
+        if (
+          product.id === action.addedProducts.productId ||
+          product.id === action.addedProducts.id
+        ) {
           return action.addedProducts
+        } else {
+          return product
+        }
+      })
+    case UPDATE_ITEM_QUANTITY:
+      return state.map(product => {
+        console.log('meeehhhpp', action)
+        if (
+          product.id === action.itemQuantityUpdated.productId ||
+          product.productId === action.itemQuantityUpdated.productId ||
+          product.id === action.itemQuantityUpdated.id ||
+          product.id === action.itemQuantityUpdated.id
+        ) {
+          return action.itemQuantityUpdated
         } else {
           return product
         }

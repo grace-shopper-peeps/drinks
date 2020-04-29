@@ -16,7 +16,6 @@ class AddToCart extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault()
     const productQuantity = Number(evt.target.quantity.value)
-    // console.log(typeof evt.target.quantity.value)
     const product = this.props.product
     product.price = Number(product.price)
     product.quantity = productQuantity
@@ -30,7 +29,6 @@ class AddToCart extends React.Component {
   // }
   render() {
     // const productId = this.props.id
-    const product = this.props.product
     // console.log('this is the current product', product)
     return (
       <form onSubmit={this.handleSubmit}>

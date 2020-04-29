@@ -5,9 +5,21 @@ import Checkout from './Checkout'
 import CartProduct from './CartProduct'
 
 class Cart extends React.Component {
+  constructor() {
+    super()
+    this.orderTotal = this.orderTotal.bind(this)
+  }
   componentDidMount() {
-    this.props.getCart() // go to the back and fetch all products in order-product table with associated orderId
+    this.props.getCart()
+    // this.orderTotal(this.props.cart) // go to the back and fetch all products in order-product table with associated orderId
     // need to get orderID from props passed from SingleDrink or AllDrinks component or pull it from the front
+  }
+
+  orderTotal(arr) {
+    arr.reduce((accum, i) => {
+      const productTotal = i.quantity * i.price((accum += productTotal))
+      return accum
+    }, 0)
   }
 
   removeItem(item) {
