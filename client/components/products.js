@@ -22,6 +22,7 @@ class Products extends React.Component {
   }
 
   handleSelect(eventKey) {
+    //refactor/optimize if time allows or after
     window.location.search = `filter=${eventKey}`
     this.props.filterProds(eventKey)
     console.log(this.props)

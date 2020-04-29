@@ -44,7 +44,7 @@ class Cart extends React.Component {
         <p>
           <b>Total:$389.99</b>
         </p>
-        <Checkout />
+        <Checkout cart={this.props.cart} />
       </div>
     )
   }
