@@ -20,28 +20,41 @@ export class Product extends React.Component {
     let user = this.props.user
     return (
       <div>
-        <h3>{product.title}</h3>
-        <img src={product.image} />
-        <div>{`Price: ${product.price}`}</div>
-        <p>{`Description: ${product.description}`}</p>
-        <AddToCart product={product} />
-        {user && user.isAdmin ? (
-          <div>
-            <DeleteProduct product={product} />{' '}
-            <UpdateProduct productId={product.id} product={product} />
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">20% off all Bourbons!</h1>
+            <p class="lead">
+              We're so excited for you to join us! Take advantage of all our
+              liquors from across the globe
+            </p>
           </div>
-        ) : (
-          ''
-        )}
-        <h4>Post A Review: </h4>
-        <PostReview productId={product.id} />
-        <hr />
-        <div>Reviews: </div>
-        <ProductReviews
-          key={product.id}
-          reviews={reviews}
-          productId={product.id}
-        />
+        </div>
+        <div class="product-view">
+          <h1 class="product-item">{product.title}</h1>
+          <img src={product.image} class="product-single-view" />
+          <div class="product-item">${product.price}.00</div>
+          <p class="product-item">{` ${product.description}`}</p>
+          <AddToCart product={product} />
+          {user && user.isAdmin ? (
+            <div>
+              <DeleteProduct product={product} />{' '}
+              <UpdateProduct productId={product.id} product={product} />
+            </div>
+          ) : (
+            ''
+          )}
+          <div id="submit-product-review">
+            <h4>Post A Review </h4>
+            <PostReview productId={product.id} />
+            <hr />
+            Reviews:
+            <ProductReviews
+              key={product.id}
+              reviews={reviews}
+              productId={product.id}
+            />
+          </div>
+        </div>
       </div>
     )
   }

@@ -99,9 +99,18 @@ nav {
 .pic {
   width: 22%;
 }
+
+.cart-pic {
+  width: 10%;
+}
 .jumbotron {
   background-color: rgb(180, 121, 43);
   color: white;
+}
+
+.cart-item {
+  margin-left: 5rem;
+  margin-bottom: 0.5rem;
 }
 
 .backdrop {
@@ -109,7 +118,11 @@ nav {
 }
 .media-body {
   align-self: center;
-  font-size: larger;
+  font-size: large;
+}
+
+.cart-media-body {
+  align-self: right;
 }
 
 .pic {
@@ -119,8 +132,20 @@ nav {
 .product-description {
   color: grey;
 }
-li {
-  position: relative;
+#add-button {
+  /* margin-top: rem; */
+  align-items: center;
+}
+
+#submit-product-review {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+.product-item {
+  text-align: center;
+}
+.product-single-view {
+  align-self: center;
 }
 
 .product-title {

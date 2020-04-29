@@ -44,22 +44,23 @@ class CartProduct extends React.Component {
 
   render() {
     const cartItem = this.props.cartItem
+    const cartItemId = this.props.cartItem.id
+      ? this.props.cartItem.id
+      : this.props.cartItem.productId
     console.log(' before cartItem', cartItem)
     return (
-      <p>
-        <img src={cartItem.image} />
-        product:
-        <b>{cartItem.title}</b>
-        ---- qty:
-        <b>{cartItem.quantity}</b>
-        ---- price:
-        <b>{cartItem.price}</b>
-        -----total Price:
-        {/* <b>{cartItem.throughProductOrders.purchasePrice}</b> */}
-        <button type="button" onClick={() => this.removeItem(cartItem)}>
-          Remove Item
-        </button>
-        <div>
+      <li class="cart-item">
+        <img src={cartItem.image} class="cart-pic" />
+        <div class="cart-media-body">
+          <p class="product-title">product:{cartItem.title}</p>
+          <p class="product-quantity">quantity:{cartItem.quantity}</p>
+          <p class="product-description">price: ${cartItem.price}.00</p>
+          <p class="product-description">total Price:</p>
+          <p>
+            <a href={`/products/${cartItemId}`} class="stretched-link">
+              {cartItem.title}
+            </a>
+          </p>
           qty:
           <input
             type="number"
@@ -67,8 +68,11 @@ class CartProduct extends React.Component {
             value={this.state.quantity}
             onChange={this.handleChange}
           />
+          <button type="button" onClick={() => this.removeItem(cartItem)}>
+            Remove Item
+          </button>
         </div>
-      </p>
+      </li>
     )
   }
 }

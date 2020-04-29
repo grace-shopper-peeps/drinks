@@ -31,7 +31,7 @@ class AddToCart extends React.Component {
     // const productId = this.props.id
     // console.log('this is the current product', product)
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} id="add-button">
         <input
           type="number"
           name="quantity"

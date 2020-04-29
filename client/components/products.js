@@ -34,23 +34,20 @@ class Products extends React.Component {
         <ul class="list-unstyled">
           {products.map(product => {
             return (
-              <li
-                href={`/products/${product.id}`}
-                class="media"
-                key={product.id}
-              >
+              <li class="media" key={product.id}>
                 <img src={product.image} class="pic" />
-                <div class="media-body" href="/">
+                <div class="media-body">
                   <p class="product-title">{product.title}</p>
                   <p class="product-description">{product.description}</p>
-                  <p class="product-description">price:{product.price}</p>
+                  <p class="product-description">${product.price}.00</p>
                   <p class="product-description">
                     category:
                     {product.category ? product.category.name : 'null'}
                   </p>
                   <AddToCart product={product} />
-                  <a href={`/products/${product.id}`} class="stretched-link" />
-
+                  <a href={`/products/${product.id}`} class="stretched-link">
+                    checkout our {product.title}
+                  </a>
                   {user && user.isAdmin ? (
                     <DeleteProduct product={product} />
                   ) : (
