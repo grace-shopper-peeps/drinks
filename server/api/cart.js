@@ -28,7 +28,7 @@ router.get('/', async (req, res, next) => {
       if (req.session.order) {
         res.json(req.session.order)
       } else {
-        res.json([])
+        res.json(['something'])
       }
     }
   } catch (err) {}
@@ -58,7 +58,10 @@ router.post('/', async (req, res, next) => {
         })
         if (productOrderExist[0]) {
           await ProductOrders.update(
-            {quantity: (productOrderExist[0].quantity += req.body.quantity)},
+            {
+              quantity: (productOrderExist[0].quantity += req.body.quantity),
+              purchasePrice: req.body.totalPrice
+            },
             {
               where: {
                 productId: productOrderExist[0].productId,
@@ -79,7 +82,8 @@ router.post('/', async (req, res, next) => {
             orderId: orderExist[0].id,
             productId: req.body.id,
             quantity: req.body.quantity,
-            price: req.body.price
+            price: req.body.price,
+            purchasePrice: req.body.totalPrice
           })
         }
       } else {
@@ -101,14 +105,16 @@ router.post('/', async (req, res, next) => {
       if (req.session.order) {
         req.session.order.push({
           quantity: req.body.quantity,
-          productId: req.body.id
+          productId: req.body.id,
+          price: req.body.price
         })
         res.json(req.body)
       } else {
         req.session.order = [
           {
             quantity: req.body.quantity,
-            productId: req.body.id
+            productId: req.body.id,
+            price: req.body.price
           }
         ]
         res.json(req.body)
@@ -117,7 +123,7 @@ router.post('/', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
-}) //figure out how to merge products if a person logs-in in the middle of a order
+})
 
 router.put('/', async (req, res, next) => {
   try {
@@ -146,15 +152,6 @@ router.put('/', async (req, res, next) => {
       res.json(updatedItemQuantity[0])
     } else {
       res.json([])
-      // req.session.order.map((product) => {
-      //   if (product.productId === req.body.id) {
-      //     product.quantity += req.body.quantity
-      //   }
-      // })
-      // const updatedProduct = req.session.order.filter((product) => {
-      //   product.productId === req.body.id
-      // })
-      // res.json(updatedProduct[0])
     }
   } catch (err) {
     next(err)
@@ -165,8 +162,7 @@ router.delete('/', async (req, res, next) => {
   try {
     if (req.user) {
       const user = await User.findByPk(req.user.id)
-      const orders = await user.getOrders({where: {status: 'Created'}}) //need to figure put why req.body doesn't exist
-      // await orders[0].removeProduct(req.body.id)
+      const orders = await user.getOrders({where: {status: 'Created'}})
       await ProductOrders.destroy({
         where: {
           productId: req.body.id,

@@ -1,10 +1,8 @@
 /* eslint-disable camelcase */
 const router = require('express').Router()
-const stripe = require('stripe')('sk_test_YQIj5qePE15uWbuDkYb5b4P500Y3P7JdZm')
-
-const Order = require('../db/models/orders')
-const User = require('../db/models/User')
 module.exports = router
+const stripe = require('stripe')('sk_test_YQIj5qePE15uWbuDkYb5b4P500Y3P7JdZm')
+const Order = require('../db/models/orders')
 
 router.use('/users', require('./users'))
 router.use('/guests', require('./guests'))
@@ -14,7 +12,6 @@ router.use('/reviews', require('./reviews'))
 router.use('/cart', require('./cart'))
 
 router.post('/stripe', async (req, res, next) => {
-  //creates the payment intents
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: 1000,
@@ -29,7 +26,6 @@ router.post('/stripe', async (req, res, next) => {
     console.log(err, 'this is a stripe test')
   }
 })
-
 router.use((req, res, next) => {
   const error = new Error('Not Found')
   error.status = 404

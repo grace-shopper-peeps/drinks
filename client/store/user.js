@@ -49,11 +49,12 @@ export const auth = (email, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
+    console.error('is this not going through')
     await axios.post('/auth/logout')
     dispatch(removeUser())
     history.push('/login')
   } catch (err) {
-    console.error(err)
+    console.error(err, 'is this not going through')
   }
 }
 export const updateUserThunk = user => async dispatch => {

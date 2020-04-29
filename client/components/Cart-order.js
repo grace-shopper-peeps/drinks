@@ -36,13 +36,24 @@ class Cart extends React.Component {
     //need image and title from Product table
     return (
       <div>
-        <h1>Cart Summary:</h1>
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">20% off all Bourbons!</h1>
+            <p class="lead">
+              We're so excited for you to join us! Take advantage of all our
+              liquors from across the globe
+            </p>
+          </div>
+        </div>
         <div>
-          {cartItems.length > 0
-            ? cartItems.map(cartItem => (
-                <CartProduct key={cartItem.id} cartItem={cartItem} />
-              ))
-            : "You're cart is empty, start shoppin!"}
+          <h1>Cart Summary:</h1>
+          <ul class="list-unstyled">
+            {cartItems.length > 0
+              ? cartItems.map(cartItem => (
+                  <CartProduct cartItem={cartItem} key={cartItem.id} />
+                ))
+              : "You're cart is empty, start shoppin!"}
+          </ul>
         </div>
         <b>Total Items: {cartItems.length}</b>
         <p>

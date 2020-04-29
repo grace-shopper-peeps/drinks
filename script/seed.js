@@ -53,7 +53,7 @@ async function seed() {
       price: 16,
       quantity: 5,
       categoryId: 2,
-      image: './martini.jpg'
+      image: 'martini.jpg'
     }),
     Product.create({
       title: 'Old Fashioned',
@@ -62,7 +62,7 @@ async function seed() {
       price: 15,
       quantity: 5,
       categoryId: 5,
-      image: '/oldf.jpg'
+      image: './oldf.jpg'
     }),
     Product.create({
       title: 'Moscow Mule',
@@ -71,7 +71,7 @@ async function seed() {
       price: 10,
       quantity: 5,
       categoryId: 1,
-      image: '/moscow.jpg'
+      image: './moscow.jpg'
     }),
     Product.create({
       title: 'Aperol Spritz',
@@ -80,7 +80,7 @@ async function seed() {
       price: 9,
       quantity: 15,
       categoryId: 6,
-      image: '/aperol.jpg'
+      image: './aperol.jpg'
     }),
     Product.create({
       title: 'Margarita',
@@ -88,7 +88,7 @@ async function seed() {
       price: 14,
       quantity: 20,
       categoryId: 4,
-      image: '/marg.jpg'
+      image: './marg.jpg'
     }),
     Product.create({
       title: 'Gin & Tonic',
@@ -96,7 +96,7 @@ async function seed() {
       price: 10,
       quantity: 10,
       categoryId: 2,
-      image: '/gandt.jpg'
+      image: './gandt.jpg'
     }),
     Product.create({
       title: 'Mint Julep',
@@ -111,7 +111,7 @@ async function seed() {
       price: 10,
       quantity: 20,
       categoryId: 2,
-      image: '/french.jpg'
+      image: './french.jpg'
     }),
     Product.create({
       title: 'Piña Colada',
@@ -119,7 +119,7 @@ async function seed() {
       price: 13,
       quantity: 10,
       categoryId: 3,
-      image: '/pina.jpg'
+      image: './pina.jpg'
     })
   ])
 

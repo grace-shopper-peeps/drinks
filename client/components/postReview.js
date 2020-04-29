@@ -1,23 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {postProductThunk} from '../store/products'
+import {postReviewThunk} from '../store/reviews'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 
-export class AddProduct extends React.Component {
+export class PostReview extends React.Component {
   constructor() {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(event) {
     event.preventDefault()
-    console.log(event.target)
-    this.props.postProduct({
+
+    this.props.postReview({
       title: event.target.title.value,
-      description: event.target.description.value,
-      price: event.target.price.value,
-      quantity: event.target.quantity.value,
-      category: event.target.category.value
+      text: event.target.description.value,
+      rating: event.target.rating.value,
+      productId: this.props.productId
     })
   }
   render() {
@@ -29,26 +28,19 @@ export class AddProduct extends React.Component {
           justify="flex-start"
           alignItems="flex-start"
         >
-          <input
-            type="text"
-            name="title"
-            placeholder="Product Name"
-            required={true}
-          />
+          <input type="text" name="title" placeholder="Title" required={true} />
           <input
             type="text"
             name="description"
-            placeholder="Description"
+            placeholder="Let us know what you think!"
             required={true}
           />
-          <input type="text" name="price" placeholder="Price" required={true} />
           <input
             type="number"
-            name="quantity"
-            placeholder="Quantity"
+            name="rating"
+            placeholder="Rating"
             required={true}
           />
-          <input type="text" name="category" placeholder="Category" />
           <Button
             variant="contained"
             color="primary"
@@ -65,8 +57,8 @@ export class AddProduct extends React.Component {
 
 export const mapDispatchToProps = dispatch => {
   return {
-    postProduct: product => dispatch(postProductThunk(product))
+    postReview: review => dispatch(postReviewThunk(review))
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddProduct)
+export default connect(null, mapDispatchToProps)(PostReview)
