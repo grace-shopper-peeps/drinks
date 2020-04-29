@@ -34,7 +34,7 @@ export class Product extends React.Component {
           ''
         )}
         <h4>Post A Review: </h4>
-        <PostReview />
+        <PostReview productId={product.id} />
         <hr />
         <div>Reviews: </div>
         <ProductReviews

@@ -53,7 +53,7 @@ async function seed() {
       price: 16,
       quantity: 5,
       categoryId: 2,
-      image: './martini.jpg'
+      image: 'martini.jpg'
     }),
     Product.create({
       title: 'Old Fashioned',

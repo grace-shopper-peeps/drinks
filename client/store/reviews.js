@@ -32,8 +32,9 @@ export const getAllReviews = () => {
 export const postReviewThunk = review => {
   return async dispatch => {
     try {
-      await axios.post('/api/reviews')
-      dispatch(postReview(review))
+      let response = await axios.post('/api/reviews', review)
+      let updatedRev = response.data
+      dispatch(postReview(updatedRev))
     } catch (err) {
       console.log(err)
     }

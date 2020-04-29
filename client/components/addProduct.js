@@ -11,6 +11,7 @@ export class AddProduct extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault()
+    console.log(event.target)
     this.props.postProduct({
       title: event.target.title.value,
       description: event.target.description.value,

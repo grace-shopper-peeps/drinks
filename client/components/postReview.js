@@ -11,10 +11,12 @@ export class PostReview extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault()
+
     this.props.postReview({
       title: event.target.title.value,
-      text: event.target.text.value,
-      rating: event.target.rating.value
+      text: event.target.description.value,
+      rating: event.target.rating.value,
+      productId: this.props.productId
     })
   }
   render() {
@@ -25,7 +27,6 @@ export class PostReview extends React.Component {
           direction="column"
           justify="flex-start"
           alignItems="flex-start"
-          width="50px"
         >
           <input type="text" name="title" placeholder="Title" required={true} />
           <input
