@@ -9,7 +9,6 @@ const updateUser = updatedUser => ({type: UPDATE_SINGLE_USER, updatedUser})
 export const getSingleUser = id => async dispatch => {
   try {
     const {data} = await axios.get(`/api/users/${id}`)
-    console.log(data)
     dispatch(singleUser(data))
   } catch (err) {
     console.error(err)
@@ -19,7 +18,6 @@ export const getSingleUser = id => async dispatch => {
 export const updateSingleUser = (id, user) => async dispatch => {
   try {
     const {data} = await axios.put(`/api/users/${id}`, user)
-    console.log(data)
     dispatch(updateUser(data))
   } catch (err) {
     console.error(err)

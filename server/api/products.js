@@ -29,7 +29,6 @@ router.get('/filter/:category', async (req, res, next) => {
         categoryId: liquor[0].id
       }
     })
-    console.log(prod)
     res.json(prod)
   } catch (err) {
     next(err)
@@ -47,7 +46,6 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/', isAdmin, async (req, res, next) => {
   try {
-    console.log('REQ BODYYYYYYYYYYYYYYYYYYYY, ', req.body)
     const product = await Product.create(req.body)
     res.json(product)
   } catch (err) {

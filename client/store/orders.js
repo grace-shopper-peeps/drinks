@@ -37,7 +37,6 @@ export const getAllOrders = () => {
     try {
       const response = await axios.get('/api/orders')
       const orders = response.data
-      console.log('thunk orders: ', orders)
       dispatch(allOrders(orders))
     } catch (err) {
       console.log(err)
@@ -66,7 +65,6 @@ const allOrdersReducer = (state = initialState, action) => {
       return {
         ...state,
         visibleOrders: state.orders.filter(order => {
-          console.log(order.status, 'order status')
           if (action.filter === order.status) {
             return order
           }

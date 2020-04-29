@@ -25,7 +25,6 @@ class Products extends React.Component {
     //refactor/optimize if time allows or after
     window.location.search = `filter=${eventKey}`
     this.props.filterProds(eventKey)
-    console.log(this.props)
   }
   render() {
     const products = this.props.products || []

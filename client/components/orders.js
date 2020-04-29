@@ -58,7 +58,6 @@ class OrderList extends React.Component {
         <ul>
           {this.props.orders.visibleOrders ? (
             this.props.orders.visibleOrders.map(order => {
-              console.log(order)
               return (
                 <div key={order.id}>
                   <Link to={`/orders/${order.id}`}>

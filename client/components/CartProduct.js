@@ -27,14 +27,11 @@ class CartProduct extends React.Component {
   }
 
   handleChange(evt) {
-    // console.log('bananas')
-    // console.log(evt.target.value)
     this.setState({quantity: evt.target.value})
     const id = this.props.cartItem.id
       ? this.props.cartItem.id
       : this.props.cartItem.productId
-    console.log('looking for cart item', this.props.cartItem)
-    console.log('handle change cartItem', id)
+
     this.props.updateItem({
       quantity: evt.target.value,
       id: id,
@@ -44,7 +41,6 @@ class CartProduct extends React.Component {
 
   render() {
     const cartItem = this.props.cartItem
-    console.log(' before cartItem', cartItem)
     return (
       <p>
         <img src={cartItem.image} />

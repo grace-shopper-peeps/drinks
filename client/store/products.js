@@ -6,7 +6,6 @@ const ADD_PRODUCT = 'ADD_PRODUCT'
 const FILTER_PRODUCTS = 'FILTER_PRODUCTS'
 
 const updateProduct = product => {
-  console.log('product', product)
   return {
     type: UPDATE_PRODUCT,
     product
@@ -93,7 +92,7 @@ export const filterProductThunk = filter => {
       const prods = response.data
       dispatch(filterProducts(prods))
     } catch (err) {
-      console.log('you dumb motherfucker')
+      console.log('error in filter')
     }
   }
 }
@@ -115,7 +114,6 @@ const allProductsReducer = (state = initialState, action) => {
     case ADD_PRODUCT:
       return [...state, action.product]
     case FILTER_PRODUCTS:
-      console.log(state)
       return action.filter
     default:
       return state

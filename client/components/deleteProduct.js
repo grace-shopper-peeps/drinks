@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 
 class DeleteProduct extends React.Component {
   delete(id) {
-    console.log('clicked')
     this.props.deleteProduct(id)
   }
   render() {

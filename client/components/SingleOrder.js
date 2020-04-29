@@ -12,7 +12,6 @@ export class SingleOrder extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
   handleChange(event) {
-    console.log('event', event.target.value)
     this.props.order.status = event.target.value
     this.props.changeOrderStatus(this.props.order)
   }
@@ -27,7 +26,6 @@ export class SingleOrder extends React.Component {
   }
 
   render() {
-    console.log('this.props single order', this.props.order)
     return (
       <div>
         <Card id="carded">

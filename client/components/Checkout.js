@@ -10,11 +10,9 @@ export default class Checkout extends React.Component {
   onToken = async token => {
     try {
       token.orderId = this.props.cart[0].throughProductOrders.orderId
-      console.log(token, 'the token')
       const {status} = await axios.post('/api/stripe', {token})
       //pass in the order to backend so you can update the status from cart to complete or whatever
       if (status === 200) {
-        console.log('it went through!')
         //this means order successfully went through
         // do something, maybe show user a message that says success or whatever
       } else {

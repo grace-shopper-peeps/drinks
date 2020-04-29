@@ -19,12 +19,9 @@ class UpdateProduct extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log(event.target.name, event.target.value)
   }
 
   handleSubmit(event) {
-    console.log('this state in handle submit: ', this.state)
-    console.log('this props in HS ', this.props)
     event.preventDefault()
     this.props.updateProd(this.state, this.props.productId)
   }

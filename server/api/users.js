@@ -33,11 +33,9 @@ router.get('/:userId', async (req, res, next) => {
 router.put('/:userId', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findByPk(req.params.userId)
-    console.log('users', users)
     const updateUser = await users.update({
       isAdmin: true
     })
-    console.log(updateUser)
     res.json(updateUser)
   } catch (err) {
     next(err)
@@ -57,9 +55,6 @@ router.delete('/:userId', isAdmin, async (req, res, next) => {
   try {
     const userForDeletion = await User.findByPk(req.params.userId)
     await userForDeletion.destroy()
-    console.log(
-      'is this route goind through ??????????????????????????????????????'
-    )
     res.sendStatus(204)
   } catch (err) {
     res.json(err)
@@ -70,11 +65,9 @@ router.delete('/:userId', isAdmin, async (req, res, next) => {
 router.put('/myProfile/:userId', async (req, res, next) => {
   try {
     const users = await User.findByPk(req.user.id)
-    console.log('users', users)
     const updateUser = await users.update({
       email: req.body.email
     })
-    console.log('updated user', updateUser)
     res.json(updateUser)
   } catch (err) {
     next(err)

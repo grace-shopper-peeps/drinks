@@ -28,7 +28,6 @@ export const updateItemQuantity = itemQuantityUpdated => ({
 export const fetchOrderProducts = () => {
   return async dispatch => {
     try {
-      console.log('hitting you try in your thunk')
       const {data} = await axios.get(`api/cart/`)
       dispatch(getOrderProducts(data)) //expect data to be an array with all the products with that orderId
     } catch (err) {
@@ -40,7 +39,6 @@ export const fetchOrderProducts = () => {
 export const addProductToCart = product => {
   return async dispatch => {
     try {
-      console.log('hitting redux thunk', product)
       const {data} = await axios.post('/api/cart', product)
       dispatch(addProducts(data))
     } catch (err) {
@@ -52,7 +50,6 @@ export const addProductToCart = product => {
 export const deleteCartItem = product => {
   return async dispatch => {
     try {
-      console.log('this is your redux product', product)
       await axios.delete('/api/cart', {data: {id: product.id}})
       dispatch(deleteItem(product))
     } catch (err) {
@@ -64,9 +61,7 @@ export const deleteCartItem = product => {
 export const updateProductQuantity = item => {
   return async dispatch => {
     try {
-      console.log('this is the redux item', item)
       const {data} = await axios.put('/api/cart', item)
-      console.log('some redux data', data)
       dispatch(updateItemQuantity(data))
     } catch (err) {
       console.log('could not update product quantity for this order')
@@ -91,7 +86,6 @@ function cart(state = [], action) {
       })
     case UPDATE_ITEM_QUANTITY:
       return state.map(product => {
-        console.log('meeehhhpp', action)
         if (
           product.id === action.itemQuantityUpdated.productId ||
           product.productId === action.itemQuantityUpdated.productId ||

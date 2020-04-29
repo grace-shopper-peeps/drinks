@@ -24,7 +24,6 @@ export const getUserThunk = id => {
     try {
       const response = await axios.get(`api/users/${id}`, id)
       const singleUser = response.data
-      console.log('is the thunk going through')
       dispatch(getSingleUser(singleUser))
     } catch (err) {
       console.log(err)
@@ -36,7 +35,6 @@ export const deleteUserThunk = id => {
   return async dispatch => {
     try {
       await axios.delete(`api/users/${id}`, id)
-      console.log('is the thunk going through ')
       dispatch(deleteUser(id))
     } catch (err) {
       console.log(err)
@@ -57,7 +55,6 @@ const allUsersReducer = (state = initialState, action) => {
         }
       })
     case DELETE_USER:
-      console.log(action, 'action')
       return [...state].filter(user => {
         if (user.id !== action.id) {
           return user

@@ -20,7 +20,6 @@ export const deleteSingleProduct = id => {
 }
 
 export const updateProduct = product => {
-  console.log('IS THIS BEING CALLED??????????')
   return {
     type: UPDATE_PRODUCT,
     product
@@ -42,7 +41,6 @@ export const fetchProductThunk = id => {
 export const updateProductThunk = (product, id) => {
   return async dispatch => {
     try {
-      console.log('IS THIS WORKING??????? THE THUNK')
       const response = await axios.put(`/api/products/${id}`, product)
       let newProduct = response.data
       dispatch(updateProduct(newProduct))

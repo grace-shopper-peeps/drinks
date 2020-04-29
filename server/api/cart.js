@@ -37,7 +37,6 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     if (req.user) {
-      console.log('GRAPPESSS')
       const orderExist = await Orders.findAll({
         where: {
           status: 'Created',
@@ -51,7 +50,6 @@ router.post('/', async (req, res, next) => {
         ]
       })
       if (orderExist[0]) {
-        console.log('LEMMONNNNS')
         const productOrderExist = await ProductOrders.findAll({
           where: {
             orderId: orderExist[0].id,
@@ -59,7 +57,6 @@ router.post('/', async (req, res, next) => {
           }
         })
         if (productOrderExist[0]) {
-          console.log('BERRRIES')
           await ProductOrders.update(
             {quantity: (productOrderExist[0].quantity += req.body.quantity)},
             {
@@ -86,7 +83,6 @@ router.post('/', async (req, res, next) => {
           })
         }
       } else {
-        console.log('COCONNNUUTT')
         const newOrder = await Orders.create({
           userId: req.user.id,
           status: 'Created'
@@ -107,17 +103,14 @@ router.post('/', async (req, res, next) => {
           quantity: req.body.quantity,
           productId: req.body.id
         })
-        console.log('MONKEY', req.session.order)
         res.json(req.body)
       } else {
-        console.log('MANGOOOS')
         req.session.order = [
           {
             quantity: req.body.quantity,
             productId: req.body.id
           }
         ]
-        console.log('APPLESS')
         res.json(req.body)
       }
     }
@@ -128,7 +121,6 @@ router.post('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    console.log('GREEEN APPLE', req.body)
     if (req.user) {
       const order = await Orders.findAll({
         where: {
@@ -151,11 +143,9 @@ router.put('/', async (req, res, next) => {
           orderId: order[0].id
         }
       })
-      // console.log('RED APPPLE', updatedItemQuantity[0])
       res.json(updatedItemQuantity[0])
     } else {
       res.json([])
-      // console.log('BUGLESS', req.body)
       // req.session.order.map((product) => {
       //   if (product.productId === req.body.id) {
       //     product.quantity += req.body.quantity
@@ -164,7 +154,6 @@ router.put('/', async (req, res, next) => {
       // const updatedProduct = req.session.order.filter((product) => {
       //   product.productId === req.body.id
       // })
-      // console.log('CHIPSS', updatedProduct)
       // res.json(updatedProduct[0])
     }
   } catch (err) {
@@ -194,7 +183,6 @@ router.delete('/', async (req, res, next) => {
         }
       }
       req.session.order.splice(indexOfRemovedItem, 1)
-      console.log('STRAWBERRY', req.session.order)
       res.sendStatus(204)
     }
   } catch (err) {

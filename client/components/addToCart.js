@@ -19,7 +19,6 @@ class AddToCart extends React.Component {
     const product = this.props.product
     product.price = Number(product.price)
     product.quantity = productQuantity
-    console.log('product', product)
     this.props.addItem(product)
   }
   // addProduct(product) {

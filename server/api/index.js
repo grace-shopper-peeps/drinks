@@ -16,7 +16,6 @@ router.use('/cart', require('./cart'))
 router.post('/stripe', async (req, res, next) => {
   //creates the payment intents
   try {
-    console.log(req.body.token, 'req body')
     const paymentIntent = await stripe.paymentIntents.create({
       amount: 1000,
       currency: 'usd',

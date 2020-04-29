@@ -57,10 +57,8 @@ export const logout = () => async dispatch => {
   }
 }
 export const updateUserThunk = user => async dispatch => {
-  console.log('user thunk', user)
   try {
     const {data} = await axios.put(`/api/users/myProfile/${user.id}`, user)
-    console.log('in try user thunk', user)
     dispatch(updateEmail(data.email))
   } catch (err) {
     console.error(err)

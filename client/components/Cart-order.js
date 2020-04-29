@@ -32,8 +32,6 @@ class Cart extends React.Component {
 
   render() {
     const cartItems = this.props.cart
-    console.log('mhahaha', cartItems)
-    console.log('hey')
     //check instance method on order-price in db
     //need image and title from Product table
     return (

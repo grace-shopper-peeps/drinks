@@ -26,7 +26,6 @@ export class MyProfile extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log(event.target.name, event.target.value)
   }
   changeProfile() {
     this.setState({
@@ -34,7 +33,6 @@ export class MyProfile extends React.Component {
     })
   }
   render() {
-    console.log('in render', this.props.user)
     return (
       <div>
         <Card id="carded">
