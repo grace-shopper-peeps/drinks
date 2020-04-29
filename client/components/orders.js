@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Button} from 'react-bootstrap'
+import {Button, Table} from 'react-bootstrap'
 import {getAllOrders, setVisibilityFilter} from '../store/orders'
 import {Link} from 'react-router-dom'
 // import {FilterForm} from './filterForm'
@@ -60,15 +60,31 @@ class OrderList extends React.Component {
             this.props.orders.visibleOrders.map(order => {
               console.log(order)
               return (
-                <li key={order.id}>
-                  <div>
-                    <Link to={`/orders/${order.id}`}>
-                      <h3>User: {order.user.email}</h3>
+                <div key={order.id}>
+                  <Link to={`/orders/${order.id}`}>
+                    {/* <h3>User: {order.user.email}</h3>
                       <h3>Status: {order.status}</h3>
-                      <div>Date Created: {order.createdAt.slice(0, 10)}</div>
-                    </Link>
-                  </div>
-                </li>
+                      <div>Date Created: {order.createdAt.slice(0, 10)}</div> */}
+                    <Table id="orderTable" striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>User Email</th>
+                          <th>Status</th>
+                          <th>Date Created</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{order.user.email}</td>
+                          <td>
+                            {order.status === null ? 'null' : order.status}
+                          </td>
+                          <td>{order.createdAt.slice(0, 10)}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Link>
+                </div>
               )
             })
           ) : (
