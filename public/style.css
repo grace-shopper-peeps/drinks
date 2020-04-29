@@ -53,6 +53,13 @@ nav {
   font-size: 90px;
 }
 
+#thankyou {
+  font-size: 150px;
+  text-align: center;
+  background-image: url('background2.jpg');
+  color: antiquewhite;
+}
+
 .drinks {
   border: slategray;
   border-style: groove;
