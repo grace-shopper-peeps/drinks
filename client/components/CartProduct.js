@@ -10,6 +10,7 @@ class CartProduct extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      // totalProductPrice:,
       quantity: this.props.cartItem.quantity
         ? this.props.cartItem.quantity
         : this.props.cartItem.throughProductOrders
@@ -26,12 +27,13 @@ class CartProduct extends React.Component {
   }
 
   handleChange(evt) {
+    // console.log('bananas')
     // console.log(evt.target.value)
     this.setState({quantity: evt.target.value})
     const id = this.props.cartItem.id
       ? this.props.cartItem.id
       : this.props.cartItem.productId
-    console.log('looking for cart item', cartItem)
+    console.log('looking for cart item', this.props.cartItem)
     console.log('handle change cartItem', id)
     this.props.updateItem({
       quantity: evt.target.value,
