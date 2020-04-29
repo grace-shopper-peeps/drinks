@@ -16,35 +16,50 @@ class Products extends React.Component {
     const user = this.props.user
     console.log(this.props, 'this.props of products')
     return (
-      <div>
-        <AddProduct />
-        <div className="container">
+      <div class="backdrop">
+        {user.Admin ? (
+          <AddProduct />
+        ) : (
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">20% off all Bourbons!</h1>
+              <p class="lead">
+                We're so excited for you to join us! Take advantage of all our
+                liquors from across the globe.
+              </p>
+            </div>
+          </div>
+        )}
+
+        <ul class="list-unstyled">
           {products.map(product => {
             return (
-              <div className="drinks" key={product.id}>
-                <Link to={`/products/${product.id}`}>
-                  <img src={product.image} />
-                  <h3>Title: </h3>
-                  <p>{product.title}</p>
-                </Link>
-                <h3>Description: </h3>
-                <p>{product.description}</p>
-                <h3>Price: </h3>
-                <p>{product.price}</p>
-                <h3>Quantity: </h3>
-                <p>{product.quantity}</p>
-                <h3>Type: </h3>
-                <p>{product.category ? product.category.name : 'null'}</p>
-                <AddToCart product={product} />
-                {user && user.isAdmin ? (
-                  <DeleteProduct product={product} />
-                ) : (
-                  ''
-                )}
-              </div>
+              <li
+                href={`/products/${product.id}`}
+                class="media"
+                key={product.id}
+              >
+                <img src={product.image} class="pic" />
+                <div class="media-body">
+                  <p class="product-title">{product.title}</p>
+                  <p class="product-description">{product.description}</p>
+                  <p class="product-description">price:{product.price}</p>
+                  <p class="product-description">
+                    category:
+                    {product.category ? product.category.name : 'null'}
+                  </p>
+                  <AddToCart product={product} />
+
+                  {user && user.isAdmin ? (
+                    <DeleteProduct product={product} />
+                  ) : (
+                    ''
+                  )}
+                </div>
+              </li>
             )
           })}
-        </div>
+        </ul>
       </div>
     )
   }

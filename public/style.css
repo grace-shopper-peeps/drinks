@@ -59,8 +59,8 @@ nav {
   background-color: lightgray;
 }
 
-#nav-bar {
-  display: flex;
+.navbar {
+  color: navy;
 }
 
 .link {
@@ -75,3 +75,43 @@ nav {
   width: 300px;
   margin: 10px;
 }
+
+.media {
+  /* border-width: 0.5px;
+  border-bottom: gray;
+  border-style: solid; */
+  /* border-color: hotpink; */
+  background-color: white;
+  /* width: 5rem;
+  height: 5rem; */
+}
+.jumbotron {
+  background-color: rgb(180, 121, 43);
+  color: white;
+}
+
+.backdrop {
+  background-color: white;
+}
+.media-body {
+  align-self: center;
+  font-size: larger;
+}
+
+.pic {
+  padding: 2rem;
+}
+
+.product-description {
+  color: grey;
+}
+
+.product-title {
+  color: rgba(5, 5, 53, 0.973);
+  font-weight: bold;
+  font-size: x-large;
+}
+
+/* span {
+  color: lightgray;
+} */
