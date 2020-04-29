@@ -10,7 +10,7 @@ class CartProduct extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // totalProductPrice:,
+      totalProductPrice: 0,
       quantity: this.props.cartItem.quantity
         ? this.props.cartItem.quantity
         : this.props.cartItem.throughProductOrders
@@ -28,8 +28,12 @@ class CartProduct extends React.Component {
 
   handleChange(evt) {
     // console.log('bananas')
-    // console.log(evt.target.value)
-    this.setState({quantity: evt.target.value})
+    const newTotal =
+      Number(evt.target.value) * Number(this.props.cartItem.price)
+    this.setState({
+      totalProductPrice: newTotal,
+      quantity: evt.target.value
+    })
     const id = this.props.cartItem.id
       ? this.props.cartItem.id
       : this.props.cartItem.productId
@@ -38,7 +42,8 @@ class CartProduct extends React.Component {
     this.props.updateItem({
       quantity: evt.target.value,
       id: id,
-      price: this.props.cartItem.price
+      price: this.props.cartItem.price,
+      totalPrice: this.state.totalProductPrice
     })
   }
 
@@ -55,7 +60,9 @@ class CartProduct extends React.Component {
           <p class="product-title">product:{cartItem.title}</p>
           <p class="product-quantity">quantity:{cartItem.quantity}</p>
           <p class="product-description">price: ${cartItem.price}.00</p>
-          <p class="product-description">total Price:</p>
+          <p class="product-description">
+            total Price: ${this.state.totalProductPrice}.00
+          </p>
           <p>
             <a href={`/products/${cartItemId}`} class="stretched-link">
               {cartItem.title}

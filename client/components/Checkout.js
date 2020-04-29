@@ -35,7 +35,7 @@ export default class Checkout extends React.Component {
             <StripeCheckout
               name="INSERT LATER" // the pop-in header title
               description="An unparalleled cocktail experience" // the pop-in header subtitle
-              orderId={this.props.cart[0].throughProductOrders.orderId}
+              // orderId={this.props.cart[0].throughProductOrders.orderId}
               token={this.onToken}
               stripeKey="pk_test_AqTzNNToEijqjx9ZOGUiqI7q00xE0x9PfI"
             />

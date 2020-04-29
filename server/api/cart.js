@@ -28,7 +28,7 @@ router.get('/', async (req, res, next) => {
       if (req.session.order) {
         res.json(req.session.order)
       } else {
-        res.json([])
+        res.json(['something'])
       }
     }
   } catch (err) {}
@@ -61,7 +61,10 @@ router.post('/', async (req, res, next) => {
         if (productOrderExist[0]) {
           console.log('BERRRIES')
           await ProductOrders.update(
-            {quantity: (productOrderExist[0].quantity += req.body.quantity)},
+            {
+              quantity: (productOrderExist[0].quantity += req.body.quantity),
+              purchasePrice: req.body.totalPrice
+            },
             {
               where: {
                 productId: productOrderExist[0].productId,
@@ -82,7 +85,8 @@ router.post('/', async (req, res, next) => {
             orderId: orderExist[0].id,
             productId: req.body.id,
             quantity: req.body.quantity,
-            price: req.body.price
+            price: req.body.price,
+            purchasePrice: req.body.totalPrice
           })
         }
       } else {
@@ -105,7 +109,8 @@ router.post('/', async (req, res, next) => {
       if (req.session.order) {
         req.session.order.push({
           quantity: req.body.quantity,
-          productId: req.body.id
+          productId: req.body.id,
+          price: req.body.price
         })
         console.log('MONKEY', req.session.order)
         res.json(req.body)
@@ -114,7 +119,8 @@ router.post('/', async (req, res, next) => {
         req.session.order = [
           {
             quantity: req.body.quantity,
-            productId: req.body.id
+            productId: req.body.id,
+            price: req.body.price
           }
         ]
         console.log('APPLESS')
@@ -151,21 +157,9 @@ router.put('/', async (req, res, next) => {
           orderId: order[0].id
         }
       })
-      // console.log('RED APPPLE', updatedItemQuantity[0])
       res.json(updatedItemQuantity[0])
     } else {
       res.json([])
-      // console.log('BUGLESS', req.body)
-      // req.session.order.map((product) => {
-      //   if (product.productId === req.body.id) {
-      //     product.quantity += req.body.quantity
-      //   }
-      // })
-      // const updatedProduct = req.session.order.filter((product) => {
-      //   product.productId === req.body.id
-      // })
-      // console.log('CHIPSS', updatedProduct)
-      // res.json(updatedProduct[0])
     }
   } catch (err) {
     next(err)
